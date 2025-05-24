@@ -19,7 +19,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: <Twitter size={20} />, href: "https://twitter.com" },
     { icon: <Github size={20} />, href: "https://github.com" },
-    { icon: <Twitter size={20} />, href: "https://discord.com" }, // Replace with a valid icon or remove this line if unnecessary
+    { icon: <Twitter size={20} />, href: "https://discord.com" }, 
     { icon: <Mail size={20} />, href: "mailto:info@airdropx.com" },
   ];
 
