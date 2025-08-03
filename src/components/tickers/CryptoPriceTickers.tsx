@@ -1,9 +1,8 @@
 "use client";
 import { Box, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
 const CryptoPriceTicker = () => {
   const theme = useTheme();
-  const [prices, setPrices] = useState([
+  const prices=[
     { symbol: "BTC", price: "$113,122.00", change: "0.00%" },
     { symbol: "ETH", price: "$3,415.02", change: "-0.05%" },
     { symbol: "LTC", price: "$107.50", change: "0.39%" },
@@ -12,7 +11,7 @@ const CryptoPriceTicker = () => {
     { symbol: "DOGE", price: "$0.19", change: "0.13%" },
     { symbol: "LINK", price: "$15.78", change: "0.00%" },
     { symbol: "SOL", price: "$159.75", change: "-0.04%" },
-  ]);
+  ];
 
   // Simulate price updates (replace with real API calls)
 //   useEffect(() => {
