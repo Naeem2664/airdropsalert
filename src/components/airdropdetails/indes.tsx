@@ -13,6 +13,8 @@ import {
   ListItemText,
   Container
 } from '@mui/material';
+import PageAddSection from '@/components/sections/adsSections/homeUpperAdSection/page'; 
+
 import {
   Bolt as BoltIcon,
   Link as LinkIcon,
@@ -34,11 +36,16 @@ const WardenAirdropPage = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ 
+    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
+        <PageAddSection />
+        <Container maxWidth="lg" sx={{ 
       py: 6,
       backgroundColor: customColors.primaryBlack,
-      minHeight: '100vh'
+      marginBottom: 20
     }}>
+        {/* Top Ad Section */}
+                
+
       <Paper elevation={3} sx={{ 
         p: { xs: 3, md: 6 }, 
         borderRadius: 4,
@@ -328,6 +335,10 @@ const WardenAirdropPage = () => {
         </Box>
       </Paper>
     </Container>
+    <PageAddSection />
+
+    </Container>
+    
   );
 };
 
