@@ -1,36 +1,95 @@
 import React from 'react';
-import { CheckCircle2} from 'lucide-react';
-import { Flame ,Pickaxe} from 'lucide-react';
-const AirdropCard = () => {
+import { 
+  Box, 
+  Typography, 
+  Chip, 
+  Avatar, 
+  Card, 
+  CardContent,
+  Stack,
+  useTheme
+} from '@mui/material';
+import {colors} from '@/utils/colors';
+import { CheckCircle, LocalFireDepartment, Construction } from '@mui/icons-material';
+
+const AirdropCard = ({ 
+  title = "WAB Summit",
+  action = "Complete the social quest",
+  status = "CONFIRMED",
+  points = 500,
+  image = null 
+}) => {
+  const theme = useTheme();
+
   return (
-    <div className="max-w-[390px] max-h-[280px] text-amber-50 bg-gray-900 shadow-md overflow-hidden border border-gray-200 p-4 flex flex-col hover:bg-green-500 transition-[background-color]">
-      <div className="flex justify-between items-start mb-3">
-        <div className="flex items-center gap-2 w-full">
-            <div className='w-[80px] h-[80px] rounded-full flex items-center justify-center bg-amber-50 text-amber-800 '> 
-                <p>Image</p>       
-            </div>
-        <h1 className="text-2xl font-bold">WAB Summit</h1>
-        </div>
-      </div>
-      <div className="flex flex-col">
-         <div className="mt-1 mb-2 flex">
-        <div className="flex items-center">
-            <span><Pickaxe className='w-4'/></span>
-            <p className="text-xl font-bold">Action: Complete the social quest</p>
-        </div>
-      </div>
-      </div>
-      <div className="flex items-center justify-between mt-5 w-full"> 
-  <span className="flex items-center gap-1 bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">
-    <CheckCircle2 className="w-3 h-3" />
-    CONFIRMED
-  </span>
-  <h3 className="text-lg font-medium px-2 py-0.5">
-    <p className='flex'><Flame className="text-red-500 w-6 h-6 text-xl" />500</p>
-    
-  </h3>
-</div>
-    </div>
+    <Card
+      sx={{
+        maxWidth: 345,
+        minWidth: 280,
+        height: '100%',
+        bgcolor: colors.primaryBlack,
+        border: `1px solid #10B981`,
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: theme.shadows[6],
+          bgcolor: "#323332"
+        }
+      }}
+      elevation={0}
+    >
+      <CardContent sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+        {/* Header with logo and title */}
+        <Stack direction="row" alignItems="flex-start" spacing={2} mb={2} >
+          <Avatar
+            sx={{
+              width: 60,
+              height: 60,
+              bgcolor: 'warning.light',
+              color: colors.primaryWhite,
+              fontSize: '1rem',
+              fontWeight: 'bold'
+            }}
+          >
+            {image || 'LOGO'}
+          </Avatar>
+          <Typography variant="h6" fontWeight="bold" component="div" color={colors.primaryWhite}>
+            {title}
+          </Typography>
+        </Stack>
+
+        {/* Action section */}
+        <Box mb={3}>
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            <Construction fontSize="small" color="action" />
+            <Typography variant="body1" fontWeight="medium" color={colors.primaryWhite}>
+              Action: {action}
+            </Typography>
+          </Stack>
+        </Box>
+
+        {/* Footer with status and points */}
+        <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'space-between' }}>
+          <Chip
+            icon={<CheckCircle fontSize="small" />}
+            label={status}
+            size="small"
+            sx={{
+              bgcolor: 'success.light',
+              color: 'success.dark',
+              fontWeight: 'medium'
+            }}
+          />
+          
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            <LocalFireDepartment fontSize="small" color="error" />
+            <Typography variant="body1" fontWeight="medium" color={colors.primaryWhite}>
+              {points}
+            </Typography>
+          </Stack>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -1,27 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Twitter, Github, Mail } from "lucide-react";
 import { colors } from "@/utils/colors";
-
+import { footerLinks,socialLinks } from "@/constants/components/links";
 const Footer = () => {
-  const footerLinks = [
-    { name: "Home", href: "/" },
-    { name: "DePIN", href: "/depin" },
-    { name: "AI", href: "/ai" },
-    { name: "DeSci", href: "/desci" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Privacy Policy", href: "/privacy" },
-  ];
-
-  const socialLinks = [
-    { icon: <Twitter size={20} />, href: "https://twitter.com" },
-    { icon: <Github size={20} />, href: "https://github.com" },
-    { icon: <Twitter size={20} />, href: "https://discord.com" }, 
-    { icon: <Mail size={20} />, href: "mailto:info@airdropx.com" },
-  ];
+ 
 
   return (
     <footer 
@@ -47,7 +30,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-green-400 transition-colors"
+                  className="text-green-400 hover:text-green-600 transition-colors"
                 >
                   {social.icon}
                 </Link>

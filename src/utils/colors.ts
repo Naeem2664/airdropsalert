@@ -3,11 +3,12 @@ export const colors = {
     // Primary Colors
     primaryGreen: '#00FF00',      // Bright green (e.g., buttons)
     primaryBlue: '#0066CC',       // Interactive elements (links, buttons)
-    primaryBlack: '#000000',      // Main text
+    primaryBlack: '#0B0B0B',      // Main text
     primaryWhite: '#FFFFFF',      // Backgrounds
+
   
     // Secondary Colors
-    secondaryGray: '#808080',     // Secondary text (e.g., "EXPIRY")
+    secondaryBlack: '#800080',     // Secondary text (e.g., "EXPIRY")
     secondaryOrange: '#FFA500',   // Discounted prices
   
     // Accents/Alerts
