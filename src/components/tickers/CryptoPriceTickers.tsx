@@ -74,7 +74,6 @@ const CryptoPriceTicker = () => {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: theme.palette.background.paper,
         borderBottom: `1px solid ${theme.palette.divider}`,
         py: 1,
         px: 2,
@@ -95,10 +94,10 @@ const CryptoPriceTicker = () => {
             key={coin.symbol}
             sx={{ display: "flex", gap: 1, alignItems: "center" }}
           >
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" fontWeight="bold" color="white">
               {coin.symbol}
             </Typography>
-            <Typography variant="body2" color="text.primary">
+            <Typography variant="body2" color="success.main">
               {coin.price}
             </Typography>
             <Typography

@@ -26,7 +26,6 @@ const ContactForm = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        bgcolor: '#0a1901'
       }}
     >
       

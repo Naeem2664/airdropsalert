@@ -129,7 +129,7 @@ const Footer = () => {
                     borderTopRightRadius: 0,
                     borderBottomRightRadius: 0,
                     '& fieldset': {
-                      borderColor: colors.secondaryBlack,
+                      borderColor: colors.primaryGreen,
                     },
                     '&:hover fieldset': {
                       borderColor: colors.primaryGreen,
