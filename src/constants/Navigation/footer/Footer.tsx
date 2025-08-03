@@ -1,105 +1,177 @@
 "use client";
-
-import Link from "next/link";
+import { Box, Typography, Link, TextField, Button, Divider, Grid } from '@mui/material';
 import { colors } from "@/utils/colors";
-import { footerLinks,socialLinks } from "@/constants/components/links";
-const Footer = () => {
- 
+import { footerLinks, socialLinks } from "@/constants/components/links";
 
+const Footer = () => {
   return (
-    <footer 
-      className="bg-gray-900 text-gray-300 border-t border-gray-800"
-      style={{ backgroundColor: colors.primaryBlack }}
+    <Box 
+      component="footer"
+      sx={{
+        backgroundColor: colors.secondaryBlack,
+        borderTop: `1px solid ${colors.secondaryBlack}`,
+        py: 8,
+        px: { xs: 3, md: 6 }
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <Box sx={{ 
+        maxWidth: '1530px',
+        mx: 'auto',
+      }}>
+        <Grid container spacing={4}>
           {/* Brand Column */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center">
-              <span className="text-3xl font-extrabold text-white">
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Link href="/" underline="none">
+              <Typography 
+                variant="h4" 
+                component="div"
+                sx={{
+                  fontWeight: 800,
+                  color: 'white',
+                  mb: 2
+                }}
+              >
                 AirdropX
-              </span>
+              </Typography>
             </Link>
-            <p className="text-gray-400">
+            <Typography variant="body2" color="grey.400" sx={{ mb: 2 }}>
               Your premier source for Web3 airdrops and crypto opportunities.
-            </p>
-            <div className="flex space-x-4">
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }}>
               {socialLinks.map((social, index) => (
                 <Link
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-green-400 hover:text-green-600 transition-colors"
+                  sx={{
+                    color: colors.primaryGreen,
+                    '&:hover': {
+                      color: colors.primaryGreen
+                    }
+                  }}
                 >
                   {social.icon}
                 </Link>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Grid>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <Grid size={{ xs: 6, md: 2 }}>
+            <Typography variant="h6" color="white" sx={{ mb: 2, fontWeight: 600 }}>
+              Quick Links
+            </Typography>
+            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
               {footerLinks.slice(0, 4).map((link) => (
-                <li key={link.name}>
+                <Box component="li" key={link.name} sx={{ mb: 1 }}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-green-400 transition-colors"
+                    underline="hover"
+                    sx={{
+                      color: 'grey.400',
+                      '&:hover': {
+                        color: colors.primaryGreen
+                      }
+                    }}
                   >
                     {link.name}
                   </Link>
-                </li>
+                </Box>
               ))}
-            </ul>
-          </div>
+            </Box>
+          </Grid>
 
           {/* Resources */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Resources</h3>
-            <ul className="space-y-2">
+          <Grid size={{ xs: 6, md: 2 }}>
+            <Typography variant="h6" color="white" sx={{ mb: 2, fontWeight: 600 }}>
+              Resources
+            </Typography>
+            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
               {footerLinks.slice(4).map((link) => (
-                <li key={link.name}>
+                <Box component="li" key={link.name} sx={{ mb: 1 }}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-green-400 transition-colors"
+                    underline="hover"
+                    sx={{
+                      color: 'grey.400',
+                      '&:hover': {
+                        color: colors.primaryGreen
+                      }
+                    }}
                   >
                     {link.name}
                   </Link>
-                </li>
+                </Box>
               ))}
-            </ul>
-          </div>
+            </Box>
+          </Grid>
 
           {/* Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
-            <p className="text-gray-400 mb-4">
+          <Grid  size={{ xs: 12, md: 4 }}>
+            <Typography variant="h6" color="white" sx={{ mb: 2, fontWeight: 600 }}>
+              Stay Updated
+            </Typography>
+            <Typography variant="body2" color="grey.400" sx={{ mb: 2 }}>
               Subscribe to our newsletter for the latest airdrops.
-            </p>
-            <form className="flex">
-              <input
+            </Typography>
+            <Box component="form" sx={{ display: 'flex' }}>
+              <TextField
                 type="email"
                 placeholder="Your email"
-                className="px-4 py-2 rounded-l bg-gray-800 text-white focus:outline-none focus:ring-1 focus:ring-green-500 w-full"
+                variant="outlined"
+                size="small"
+                sx={{
+                  flexGrow: 1,
+                  '& .MuiOutlinedInput-root': {
+                    color: 'white',
+                    backgroundColor: colors.secondaryBlack,
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0,
+                    '& fieldset': {
+                      borderColor: colors.secondaryBlack,
+                    },
+                    '&:hover fieldset': {
+                      borderColor: colors.primaryGreen,
+                    },
+                  },
+                }}
               />
-              <button
+              <Button
                 type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r transition-colors"
+                variant="contained"
+                sx={{
+                  backgroundColor: colors.primaryGreen,
+                  color: 'white',
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                  px: 3,
+                  '&:hover': {
+                    backgroundColor: colors.primaryGreen
+                  }
+                }}
               >
                 Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-          <p>© {new Date().getFullYear()} AirdropX. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+        <Divider sx={{ 
+          borderColor: colors.primaryBlack,
+          my: 4,
+          mx: { xs: -3, md: -6 }
+        }} />
+        <Typography 
+          variant="body2" 
+          color="grey.500" 
+          align="center"
+        >
+          © {new Date().getFullYear()} AirdropX. All rights reserved.
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

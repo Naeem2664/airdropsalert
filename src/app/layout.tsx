@@ -4,6 +4,7 @@ import Providers from "@/components/Providers/Providers";
 import Navbar from "@/constants/Navigation/navbar/Navbar";
 import Footer from "@/constants/Navigation/footer/Footer";
 import { Roboto_Mono } from "next/font/google";
+import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 
 const notoSans = Roboto_Mono({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
         className={`${notoSans.variable} antialiased`}
 
       >
+        <CryptoPriceTicker/>
         <Navbar />
         <div className="pt-[100px]">
           <Providers>

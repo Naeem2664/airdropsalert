@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import {colors} from '@/utils/colors';
 import { CheckCircle, LocalFireDepartment, Construction } from '@mui/icons-material';
+import Link from 'next/link';
 
 const AirdropCard = ({ 
   title = "WAB Summit",
@@ -22,7 +23,8 @@ const AirdropCard = ({
   const theme = useTheme();
 
   return (
-    <Card
+    <Link href="/details" style={{ textDecoration: 'none' }}>
+      <Card
       sx={{
         maxWidth: 345,
         minWidth: 280,
@@ -90,6 +92,9 @@ const AirdropCard = ({
         </Box>
       </CardContent>
     </Card>
+
+    </Link>
+    
   );
 };
 

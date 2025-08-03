@@ -1,11 +1,12 @@
 "use client";
-import { Box, Button, Container,Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import AirdropCard from "@/components/cards/airdropCard";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import Grid from '@mui/material/Grid';
-
+import Grid from "@mui/material/Grid";
+import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
+import PageAddSection from "@/components/sections/adsSections/homeUpperAdSection/page";
 export default function FeaturedAirdropsPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -17,7 +18,8 @@ export default function FeaturedAirdropsPage() {
   // Mock data - replace with your actual airdrop data
   const airdrops = Array(20).fill({
     title: "Airdrop Name",
-    description: "This is a sample airdrop description that explains what the project is about.",
+    description:
+      "This is a sample airdrop description that explains what the project is about.",
     status: "Live",
     endDate: "2023-12-31",
     participants: 15000,
@@ -26,45 +28,34 @@ export default function FeaturedAirdropsPage() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      {/* Top Ad Section */}
-      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
-      <Box sx={{ 
-        width: "100%", 
-        height: "90px", 
-        bgcolor: "grey.900", 
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderBottom: "1px solid",
-        borderColor: "divider"
-      }}>
-        <Typography variant="body2" color="white">
-          Advertisement Space - Top Banner (728x90)
-        </Typography>
-      </Box>
+      <CryptoPriceTicker />
 
-      {/* Main Content */}
-      <Box sx={{ flex: 1, py: 4 }}>
-        
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
+        {/* Top Ad Section */}
+        <PageAddSection />
+        {/* Main Content */}
+        <Box sx={{ flex: 1, py: 4 }}>
           {/* Header Section - Left Aligned */}
-          <Box sx={{ 
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            mb: 4
-          }}>
-            <Typography 
-              variant="h5" 
-              component="h2" 
-              sx={{ 
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              mb: 4,
+            }}
+          >
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{
                 fontWeight: 600,
                 color: "#10B981",
-                mb: 1
+                mb: 1,
               }}
             >
               AI Projects
             </Typography>
-            
+
             {/* Search Bar */}
             <Box
               component="form"
@@ -72,7 +63,7 @@ export default function FeaturedAirdropsPage() {
               sx={{
                 width: "100%",
                 maxWidth: "600px",
-                mb: 3
+                mb: 3,
               }}
             >
               <TextField
@@ -129,7 +120,7 @@ export default function FeaturedAirdropsPage() {
             {airdrops.map((airdrop, index) => (
               <Grid
                 key={index}
-               size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -167,24 +158,10 @@ export default function FeaturedAirdropsPage() {
               Load More
             </Button>
           </Box>
-        
-      </Box>
+        </Box>
 
-      {/* Bottom Ad Section */}
-      <Box sx={{ 
-        width: "100%", 
-        height: "90px", 
-        bgcolor: "grey.900", 
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderTop: "1px solid",
-        borderColor: "divider"
-      }}>
-        <Typography variant="body2" color="text.secondary">
-          Advertisement Space - Bottom Banner (728x90)
-        </Typography>
-      </Box>
+        {/* Bottom Ad Section */}
+        <PageAddSection />
       </Container>
     </Box>
   );

@@ -21,11 +21,11 @@ const Navbar = () => {
 
   return (
     <AppBar 
-      position="fixed" 
       sx={{ 
         backgroundColor: '#000000',
         boxShadow: 3,
-        py: 2
+        py: 2,
+        marginBottom: '1rem'
       }}
     >
       <Toolbar sx={{ 

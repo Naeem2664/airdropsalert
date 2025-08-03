@@ -1,7 +1,6 @@
 "use client";
 import { Box, Typography, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 const CryptoPriceTicker = () => {
   const theme = useTheme();
   const [prices, setPrices] = useState([
@@ -16,65 +15,61 @@ const CryptoPriceTicker = () => {
   ]);
 
   // Simulate price updates (replace with real API calls)
-  useEffect(() => {
-    const fetchPrices = async () => {
-      try {
-        const response = await fetch(
-          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true"
-        );
-        const data = await response.json();
-        // Process data and update state
-        setPrices([
-          {
-            symbol: "BTC",
-            price: `$${data.bitcoin.usd}`,
-            change: `${data.bitcoin.usd_24h_change}%`,
-          },
-          {
-            symbol: "ETH",
-            price: `$${data.ethereum.usd}`,
-            change: `${data.ethereum.usd_24h_change}%`,
-          },
-          {
-            symbol: "LTC",
-            price: `$${data.litecoin.usd}`,
-            change: `${data.litecoin.usd_24h_change}%`,
-          },
-          {
-            symbol: "ADA",
-            price: `$${data.cardano.usd}`,
-            change: `${data.cardano.usd_24h_change}%`,
-          },
-          {
-            symbol: "BNB",
-            price: `$${data.bnb.usd}`,
-            change: `${data.bnb.usd_24h_change}%`,
-          },
-          {
-            symbol: "DOGE",
-            price: `$${data.dogecoin.usd}`,
-            change: `${data.dogecoin.usd_24h_change}%`,
-          },
-          {
-            symbol: "LINK",
-            price: `$${data.chainlink.usd}`,
-            change: `${data.chainlink.usd_24h_change}%`,
-          },
-          {
-            symbol: "SOL",
-            price: `$${data.solana.usd}`,
-            change: `${data.solana.usd_24h_change}%`,
-          },
-        ]);
-      } catch (error) {
-        console.error("Error fetching prices:", error);
-      }
-    };
+//   useEffect(() => {
+//     const fetchPrices = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd%2Ceur&ids=bitcoin&names=Bitcoin&include_tokens=all&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&precision=full"
+//         );
+//         const data = response.data();
+//         console.log(data);
+//         // Process data and update state
+//         setPrices([
+//           {
+//             symbol: "BTC",
+//             price: `$${data.bitcoin.usd}`,
+//             change: `${data.bitcoin.usd_24h_change}%`,
+//           },
+//           {
+//             symbol: "ETH",
+//             price: `$${data.ethereum.usd}`,
+//             change: `${data.ethereum.usd_24h_change}%`,
+//           },
+//           {
+//             symbol: "BNB",
+//             price: `$${data.bnb.usd}`,
+//             change: `${data.bnb.usd_24h_change}%`,
+//           },
+//           {
+//             symbol: "DOGE",
+//             price: `$${data.dogecoin.usd}`,
+//             change: `${data.dogecoin.usd_24h_change}%`,
+//           },
+//           {
+//             symbol: "LINK",
+//             price: `$${data.chainlink.usd}`,
+//             change: `${data.chainlink.usd_24h_change}%`,
+//           },
+//           {
+//             symbol: "SOL",
+//             price: `$${data.solana.usd}`,
+//             change: `${data.solana.usd_24h_change}%`,
+//           },
+//         ]);
+//       } catch (error) {
+//         console.error("Error fetching prices:", error);
+//       }
+//     };
 
-    fetchPrices();
-    const interval = setInterval(fetchPrices, 30000);
-    return () => clearInterval(interval);
-  }, []);
+//     fetchPrices();
+//     const interval = setInterval(fetchPrices, 30000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+  if (prices.length === 0) {
+    return <Typography>Loading...</Typography>;
+  }
+
 
   return (
     <Box
