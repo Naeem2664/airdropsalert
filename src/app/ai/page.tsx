@@ -7,15 +7,23 @@ import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import PageAddSection from "@/components/sections/adsSections/homeUpperAdSection/page";
+import { useGetAirdrops } from "@/hooks/getAirdrops";
 export default function FeaturedAirdropsPage() {
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { data, isLoading, isError } = useGetAirdrops();
+
+  console.log("Airdrop Data:",data);
+
+
+
+
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Searching for:", searchQuery);
   };
 
-  // Mock data - replace with your actual airdrop data
   const airdrops = Array(20).fill({
     title: "Airdrop Name",
     description:

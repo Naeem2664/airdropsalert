@@ -1,30 +1,29 @@
 "use client";
+
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import Featured from "@/components/homeSections/featured/index";
-import Potentials from "@/components/homeSections/potentials/index";
-import Upcoming from "@/components/homeSections/upcoming/index";
+import { useGetAirdrops } from "@/hooks/getAirdrops";
+import { useGetCategories } from "@/hooks/getCategories";
+import { useGetPlatforms } from "@/hooks/getPlatforms";
+import { useGetAirdropType } from "@/hooks/getAirdropType";
+import AirdropTypeSection from "@/components/homeSections/type";
 
 export default function Home() {
-  const [searchActive, setSearchActive] = useState("featured");
+  const [searchActive, setSearchActive] = useState<string>("");
 
-  const homeLinks = [
-    { name: "Featured", href: "featured" },
-    { name: "Potentials", href: "potentials" },
-    { name: "Upcoming", href: "upcoming" },
-  ];
+  const { data: airdrops } = useGetAirdrops();
+  const { data: categories } = useGetCategories();
+  const { data: platforms } = useGetPlatforms();
+  const { data: airdropTypes, isLoading, error } = useGetAirdropType();
+
+  // Set default active tab after data is loaded
+  if (!searchActive && airdropTypes && airdropTypes.length > 0) {
+    setSearchActive(airdropTypes[0].name.toLowerCase());
+  }
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-      </Box>
+      {/* Tabs Section */}
       <Box
         sx={{
           display: "flex",
@@ -50,16 +49,21 @@ export default function Home() {
                 py: 4,
               }}
             >
-              {homeLinks.map((link) => (
+              {isLoading && <p>Loading types...</p>}
+              {error && <p>Failed to load types.</p>}
+
+              {airdropTypes?.map((type: any) => (
                 <Button
-                  onClick={() => setSearchActive(link.href)}
-                  key={link.href}
-                  id={link.href}
+                  key={type.id}
+                  onClick={() => setSearchActive(type.name.toLowerCase())}
                   sx={{
                     px: 3,
                     py: 1,
                     mx: 1,
-                    color: searchActive === link.href ?"#10B981": "white",
+                    color:
+                      searchActive === type.name.toLowerCase()
+                        ? "#10B981"
+                        : "white",
                     fontSize: "1rem",
                     position: "relative",
                     textTransform: "none",
@@ -69,36 +73,48 @@ export default function Home() {
                       bottom: 0,
                       left: "50%",
                       transform: "translateX(-50%)",
-                      width: searchActive === link.href ? "80%" : "0%",
+                      width:
+                        searchActive === type.name.toLowerCase()
+                          ? "80%"
+                          : "0%",
                       height: "2px",
                       backgroundColor: "#10B981",
-                      transition: "width 0.3s ease, background-color 0.3s ease",
+                      transition:
+                        "width 0.3s ease, background-color 0.3s ease",
                     },
                     "&:hover": {
                       "&:after": {
                         width: "80%",
-                        backgroundColor:"#10B981",
-                      }
-                    }
+                        backgroundColor: "#10B981",
+                      },
+                    },
                   }}
                 >
-                  {link.name}
+                  {type.name}
                 </Button>
               ))}
             </Box>
           </nav>
         </Box>
       </Box>
+
+      {/* Dynamic Airdrop Type Section */}
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          width: "100%",
         }}
       >
-        {searchActive === "featured" && <Featured />}
-        {searchActive === "potentials" && <Potentials />}
-        {searchActive === "upcoming" && <Upcoming />}
+        {searchActive && (
+          <AirdropTypeSection
+            typeName={searchActive}
+            airdrops={airdrops}
+            categories={categories}
+            platforms={platforms}
+          />
+        )}
       </Box>
     </>
   );

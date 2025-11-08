@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import Airdrops from "@/components/homeSections/index";
 export default function Home() {
+  
   return (
     <>
       <Box

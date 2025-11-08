@@ -2,14 +2,17 @@ import XIcon from '@mui/icons-material/X';
 import { GitHub, Twitter,Mail } from "@mui/icons-material";
 
 export const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "DePIN Projects", href: "/depin" },
-    { name: "AI Projects", href: "/ai" },
-    { name: "DeSci Projects", href: "/desci" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-
+  { name: "DePIN", href: "/depin" },
+  { name: "DeFi", href: "/defi" },
+  { name: "NFTs / GameFi / Metaverse", href: "/nft-gamefi-metaverse" },
+  { name: "DAOs / Governance", href: "/dao-governance" },
+  { name: "Social / Creator Tokens", href: "/social-tokens" },
+  { name: "DeSci", href: "/desci" },
+  { name: "AI / Web3 Tools", href: "/ai-web3-tools" },
+  { name: "Privacy / Security", href: "/privacy-security" },
+  { name: "Layer 1 & Layer 2", href: "/layer1-layer2" },
+  { name: "Bridges / Cross-chain", href: "/bridges-crosschain" },
+];
 
  export  const footerLinks = [
     { name: "Home", href: "/" },

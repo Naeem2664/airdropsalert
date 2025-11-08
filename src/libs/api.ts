@@ -1,0 +1,68 @@
+import { supabase } from "@/libs/supabase";
+import { Airdrop } from "@/contracts/airdrop.type";
+import { Category } from "@/contracts/category.type";
+import { Platform } from "@/contracts/platform.type";
+
+// Fetch all airdrops
+export async function fetchAirdrops(): Promise<Airdrop[]> {
+  const { data, error } = await supabase
+    .from("airdrops")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+    console.log("Fetched airdrops:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data || [];
+}
+
+export const fetchAirdropsByCategories = async (slug: string): Promise<Airdrop[]> => {
+  const { data, error } = await supabase
+    .from("airdrops")
+    .select("*")
+    .eq("category_slug", slug)
+    .order("created_at", { ascending: false });
+
+    console.log("Fetched airdrops by category:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data || [];
+};
+
+// Fetch single airdrop by ID
+export async function fetchAirdropById(id: string): Promise<Airdrop | null> {
+  const { data, error } = await supabase
+    .from("airdrops")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+console.log("Fetched airdrop by ID:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data;
+}
+
+export async function fetchCategories(): Promise<Category[]> {
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .order("created_at", { ascending: false });
+console.log("Fetched categories:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data || [];
+}
+export async function fetchPlatforms(): Promise<Platform[]> {
+  const { data, error } = await supabase
+    .from("platforms")
+    .select("*")
+    .order("created_at", { ascending: false });
+console.log("Fetched platforms:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data || [];
+}
+export async function fetchAirdrop_Type(): Promise<Category[]> {
+  const { data, error } = await supabase
+    .from("airdrop_type")
+    .select("*")
+    .order("created_at", { ascending: false });
+console.log("Fetched airdrop types:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return data || [];
+}

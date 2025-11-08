@@ -4,13 +4,12 @@ import Providers from "@/components/Providers/Providers";
 import Navbar from "@/constants/Navigation/navbar/Navbar";
 import Footer from "@/constants/Navigation/footer/Footer";
 import { Roboto_Mono } from "next/font/google";
-import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 
 const notoSans = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-noto-sans',
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  variable: "--font-noto-sans",
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   title: "AirdropX",
@@ -24,19 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${notoSans.variable} antialiased`}
-
-      >
-        <CryptoPriceTicker/>
-        <Navbar />
+      <body className={`${notoSans.variable} antialiased`}>
         <div className="pt-[100px]">
           <Providers>
+            <Navbar />
             {children}
           </Providers>
         </div>
-        <Footer/>
-
+        <Footer />
       </body>
     </html>
   );

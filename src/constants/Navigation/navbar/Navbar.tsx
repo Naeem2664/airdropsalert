@@ -10,14 +10,25 @@ import {
   Box,
   Drawer,
   List,
-  ListItem,
   ListItemButton,
-  Divider
+  Divider,
+  Menu as MuiMenu,
+  MenuItem
 } from "@mui/material";
-import { navLinks } from "@/constants/components/links";
+import { useGetCategories } from "@/hooks/getCategories";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { data: categories } = useGetCategories();
+
+  const handleMenuOpen = (event:any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar 
@@ -57,27 +68,45 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
-          {navLinks.map((link) => (
-            <Link key={link.name} href={link.href} passHref>
-              <Button
-                component="a"
-                sx={{
-                  color: '#10B981',
-                  fontSize: '1.125rem',
-                  fontWeight: '600',
-                  textTransform: 'none',
-                  letterSpacing: '0.025em',
-                  '&:hover': {
-                    color: '#0ea371',
-                    backgroundColor: 'transparent'
-                  }
-                }}
-              >
-                {link.name}
-              </Button>
-            </Link>
-          ))}
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4, alignItems: 'center' }}>
+          {/* Separate buttons */}
+          <Link href="/" passHref>
+            <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Home</Button>
+          </Link>
+          <Button
+            sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}
+            onClick={handleMenuOpen}
+          >
+            Categories
+          </Button>
+          <MuiMenu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            MenuListProps={{ sx: { backgroundColor: '#000000', color: '#10B981' } }}
+          >
+            {(categories ?? []).map((link) => (
+              <MenuItem key={link.name} onClick={handleMenuClose}>
+                <Link href={`/categories/${link.slug}`} key={link.slug} passHref>
+                  <Button sx={{ color: '#10B981', textTransform: 'none' }}>
+                    {link.name}
+                  </Button>
+                </Link>
+              </MenuItem>
+            ))}
+          </MuiMenu>
+          <Link href="/about" passHref>
+            <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>About Us</Button>
+          </Link>
+          <Link href="/blog" passHref>
+            <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Blog</Button>
+          </Link>
+          <Link href="/contact" passHref>
+            <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Contact Us</Button>
+          </Link>
+
+          {/* Dropdown for categories */}
+         
         </Box>
 
         {/* Mobile Menu Button */}
@@ -111,28 +140,29 @@ const Navbar = () => {
         }}
       >
         <List>
-          {navLinks.map((link) => (
-            <ListItem key={link.name} disablePadding>
-              <Link href={link.href} passHref>
-                <ListItemButton
-                  onClick={() => setIsOpen(false)}
-                  sx={{
-                    color: '#10B981',
-                    fontSize: '1.125rem',
-                    fontWeight: '500',
-                    py: 3,
-                    px: 4,
-                    '&:hover': {
-                      color: '#0ea371',
-                      backgroundColor: 'rgba(16, 185, 129, 0.1)'
-                    }
-                  }}
-                >
-                  {link.name}
-                </ListItemButton>
-              </Link>
-              <Divider sx={{ borderColor: '#1F2937' }} />
-            </ListItem>
+          {/* Separate mobile buttons */}
+          <Link href="/" passHref>
+            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Home</ListItemButton>
+          </Link>
+          <Link href="/about" passHref>
+            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>About Us</ListItemButton>
+          </Link>
+          <Link href="/blog" passHref>
+            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Blog</ListItemButton>
+          </Link>
+          <Link href="/contact" passHref>
+            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Contact Us</ListItemButton>
+          </Link>
+
+          <Divider sx={{ borderColor: '#1F2937', my: 1 }} />
+
+          {/* Categories mobile dropdown */}
+          {(categories ?? []).map((link) => (
+            <Link key={link.name} href={`/categories/${link.slug}`} passHref>
+              <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>
+                {link.name}
+              </ListItemButton>
+            </Link>
           ))}
         </List>
       </Drawer>
