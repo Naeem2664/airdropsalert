@@ -1,10 +1,9 @@
 "use client";
 import HeroSection from "@/components/sections/homeHeroSection/page";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import Airdrops from "@/components/homeSections/index";
 export default function Home() {
-
   return (
     <>
       <Box
@@ -15,11 +14,10 @@ export default function Home() {
           justifyContent: "center",
         }}
       >
-        <CryptoPriceTicker/>
+        <CryptoPriceTicker />
         <HeroSection />
       </Box>
-      <Box
-      >
+      <Box>
         <Airdrops />
       </Box>
     </>
