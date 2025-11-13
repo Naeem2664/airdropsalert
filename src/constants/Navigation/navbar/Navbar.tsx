@@ -19,10 +19,10 @@ import { useGetCategories } from "@/hooks/getCategories";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const { data: categories } = useGetCategories();
 
-  const handleMenuOpen = (event:any) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
