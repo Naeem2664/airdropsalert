@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import {colors} from '@/utils/colors';
 import { CheckCircle, LocalFireDepartment, Construction } from '@mui/icons-material';
-import Link from 'next/link';
 
 interface AirdropCardProps {
   name: string;
@@ -20,7 +19,6 @@ interface AirdropCardProps {
   airdrop_status?: string;
   trust_score?: number;
   sx?: object;
-  obj_id?: string;
 }
 
 const AirdropCard: React.FC<AirdropCardProps> = ({
@@ -30,7 +28,6 @@ const AirdropCard: React.FC<AirdropCardProps> = ({
   airdrop_status,
   trust_score,
   sx,
-  obj_id
 }) => {
   const theme = useTheme();
 
@@ -42,7 +39,6 @@ const AirdropCard: React.FC<AirdropCardProps> = ({
       </Avatar>;
 
   return (
-    <Link href={`/details/${obj_id || ''}`} style={{ textDecoration: 'none' }}>
       <Card
         sx={{
           maxWidth: 345,
@@ -107,7 +103,6 @@ const AirdropCard: React.FC<AirdropCardProps> = ({
           </Box>
         </CardContent>
       </Card>
-    </Link>
   );
 };
 

@@ -20,10 +20,10 @@ export const useGetAirdropsByCategories = (slug: string) => {
   });
 };
 
-export const useGetAirdropById = (id: string | number) => {
+export const useGetAirdropById = (id: string) => {
   return useQuery({
     queryKey: ['airdrop', id],
-    queryFn: () => fetchAirdropById(String(id)),
+    queryFn: () => fetchAirdropById(id),
     staleTime: 1000 * 60 * 5,
     retry: 1,
     enabled: !!id,

@@ -1,9 +1,9 @@
 "use client";
-import { Box, Button, Container, Grid, Typography, TextField, IconButton, InputAdornment } from "@mui/material";
+import { Box, Button, Container, Grid, Typography, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useMemo } from "react";
 import AirdropCard from "@/components/cards/airdropCard";
-
+import Link from "next/link";
 export default function AirdropTypeSection({ typeName, airdrops,categories }: any) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -83,7 +83,9 @@ export default function AirdropTypeSection({ typeName, airdrops,categories }: an
         <Grid container spacing={{ xs: 2, sm: 3, md: 3, lg: 4 }} justifyContent="center">
           {filteredAirdrops.map((airdrop: any, index: number) => (
             <Grid key={index} xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
+              <Link href={`/airdrop/${airdrop.id}`} key={airdrop.id}>
               <AirdropCard {...airdrop} sx={{ width: "100%", maxWidth: "360px" }} />
+              </Link>
             </Grid>
           ))}
         </Grid>
