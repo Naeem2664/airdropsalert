@@ -23,7 +23,6 @@ import {
   Timeline as VolumeIcon,
 } from "@mui/icons-material";
 import { useGetAirdropById } from "@/hooks/getAirdrops";
-import { useRouter } from "next/router";
 
 interface Props{
     params: {
@@ -32,7 +31,7 @@ interface Props{
 }
 const AirdropDetailsPage = ({params}:Props) => {
     const {id}=params;
-    const {data:airdrop,isLoading}=useGetAirdropById(id) 
+    const {data:airdrop}=useGetAirdropById(id) 
 
     console.log("Airdrop Details:", airdrop);
   const customColors = {
@@ -108,7 +107,7 @@ const AirdropDetailsPage = ({params}:Props) => {
                     fontWeight: "bold",
                   }}
                 >
-                  {Airdrop ?<img src={Airdrop.src} alt="Airdrop logo" /> : "LOGO"}
+                  {airdrop ?<img src={airdrop.image_urls[0]} alt="Airdrop logo" /> : "LOGO"}
                 </Avatar>
                 <List dense>
                   <ListItem sx={{ px: 0 }}>
