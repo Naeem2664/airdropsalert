@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import AirdropCard from "@/components/cards/airdropCard";
 import { Airdrop } from "@/contracts/airdrop.type";
 import Link from "next/link";
-export default function AirdropTypeSection({ typeName, airdrops,categories }: any) {
+export default function AirdropTypeSection({ typeName, airdrops,categories }: { typeName: string; airdrops: Airdrop[]; categories: string[] }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   console.log("Airdrops in Type Section:", airdrops);
