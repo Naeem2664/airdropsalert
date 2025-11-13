@@ -1,11 +1,12 @@
 "use client";
-import { Box, Button, Container, Grid, Typography, TextField, InputAdornment } from "@mui/material";
+import { Box, Button, Container, Typography, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useMemo } from "react";
 import AirdropCard from "@/components/cards/airdropCard";
 import { Airdrop } from "@/contracts/airdrop.type";
+import { Category } from "@/contracts/category.type";
 import Link from "next/link";
-export default function AirdropTypeSection({ typeName, airdrops,categories }: { typeName: string; airdrops: Airdrop[]; categories: string[] }) {
+export default function AirdropTypeSection({ typeName, airdrops, categories }: { typeName: string; airdrops: Airdrop[] | undefined; categories: Category[] | undefined }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   console.log("Airdrops in Type Section:", airdrops);
@@ -35,7 +36,7 @@ export default function AirdropTypeSection({ typeName, airdrops,categories }: { 
           alignItems: "center",
         }}
       >
-        <Typography variant="h3" component="h2" sx={{ mb: 2, fontWeight: 800 }} color="#10B981">
+        <Typography variant="h4" component="h4" sx={{ mb: 2, fontWeight: 800 }} color="#10B981">
           {typeName.charAt(0).toUpperCase() + typeName.slice(1)} Projects
         </Typography>
 
@@ -81,15 +82,15 @@ export default function AirdropTypeSection({ typeName, airdrops,categories }: { 
         </Box>
 
         {/* Airdrop Cards */}
-        <Grid container spacing={{ xs: 2, sm: 3, md: 3, lg: 4 }} justifyContent="center">
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
           {filteredAirdrops.map((airdrop: Airdrop, index: number) => (
-            <Grid key={index} xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
+            <Box key={index} sx={{ display: "flex", justifyContent: "center", flex: '0 0 320px', maxWidth: '360px' }}>
               <Link href={`/airdrop/${airdrop.id}`} key={airdrop.id}>
               <AirdropCard {...airdrop} sx={{ width: "100%", maxWidth: "360px" }} />
               </Link>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         {filteredAirdrops.length === 0 && (
           <Typography color="grey.400" sx={{ mt: 4 }}>

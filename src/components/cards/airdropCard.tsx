@@ -15,9 +15,9 @@ import { CheckCircle, LocalFireDepartment, Construction } from '@mui/icons-mater
 interface AirdropCardProps {
   name: string;
   image_urls?: string[];
-  actions?: string;
-  airdrop_status?: string;
-  trust_score?: number;
+  actions?: string | null;
+  airdrop_status?: string | null;
+  trust_score?: number | null;
   sx?: object;
 }
 

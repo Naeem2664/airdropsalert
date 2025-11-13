@@ -23,6 +23,7 @@ import {
   Timeline as VolumeIcon,
 } from "@mui/icons-material";
 import { useGetAirdropById } from "@/hooks/getAirdrops";
+import Image from "next/image";
 
 interface Props{
     params: {
@@ -107,7 +108,7 @@ const AirdropDetailsPage = ({params}:Props) => {
                     fontWeight: "bold",
                   }}
                 >
-                  {airdrop ?<img src={airdrop.image_urls[0]} alt="Airdrop logo" /> : "LOGO"}
+                  {airdrop ?<Image src={airdrop.image_urls[0]} alt="Airdrop logo" /> : "LOGO"}
                 </Avatar>
                 <List dense>
                   <ListItem sx={{ px: 0 }}>

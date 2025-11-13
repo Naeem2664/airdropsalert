@@ -94,9 +94,9 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
 
                     {/* Airdrop Cards Grid */}
                     {filteredAirdrops.length > 0 ? (
-                        <Grid container spacing={{ xs: 2, sm: 3, md: 3, lg: 4 }}>
+                        <Grid container spacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
                             {filteredAirdrops.map((airdrop, index) => (
-                                <Grid key={index} item xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
+                                <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3 }} sx={{ display: "flex", justifyContent: "center",flex:"0 0 320px",maxWidth:"360px" }}>
                                     <AirdropCard
                                         {...airdrop}
                                         actions={airdrop.actions ?? undefined}

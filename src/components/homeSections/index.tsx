@@ -4,16 +4,15 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { useGetAirdrops } from "@/hooks/getAirdrops";
 import { useGetCategories } from "@/hooks/getCategories";
-import { useGetPlatforms } from "@/hooks/getPlatforms";
 import { useGetAirdropType } from "@/hooks/getAirdropType";
 import AirdropTypeSection from "@/components/homeSections/type";
+import { Category } from "@/contracts/category.type";
 
 export default function Home() {
   const [searchActive, setSearchActive] = useState<string>("");
 
   const { data: airdrops } = useGetAirdrops();
   const { data: categories } = useGetCategories();
-  const { data: platforms } = useGetPlatforms();
   const { data: airdropTypes, isLoading, error } = useGetAirdropType();
 
   // Set default active tab after data is loaded
@@ -52,7 +51,7 @@ export default function Home() {
               {isLoading && <p>Loading types...</p>}
               {error && <p>Failed to load types.</p>}
 
-              {airdropTypes?.map((type: any) => (
+              {airdropTypes?.map((type: Category) => (
                 <Button
                   key={type.id}
                   onClick={() => setSearchActive(type.name.toLowerCase())}
@@ -112,7 +111,6 @@ export default function Home() {
             typeName={searchActive}
             airdrops={airdrops}
             categories={categories}
-            platforms={platforms}
           />
         )}
       </Box>
