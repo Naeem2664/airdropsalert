@@ -32,15 +32,22 @@ export const fetchAirdropsByCategories = async (
 
 // Fetch single airdrop by ID
 export async function fetchAirdropById(id: string): Promise<Airdrop | null> {
+  if (!id) return null;
+
   const { data, error } = await supabase
     .from("airdrops")
     .select("*")
     .eq("id", id)
     .single();
-  console.log("Fetched airdrop by ID:", data);
-  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+
+  if (error) {
+    console.error("Supabase fetch error:", error);
+    return null;
+  }
+
   return data as Airdrop | null;
 }
+
 
 export async function fetchCategories(): Promise<Category[]> {
   const { data, error } = await supabase
