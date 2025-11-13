@@ -6,7 +6,7 @@ import { useGetAirdrops } from "@/hooks/getAirdrops";
 import { useGetCategories } from "@/hooks/getCategories";
 import { useGetAirdropType } from "@/hooks/getAirdropType";
 import AirdropTypeSection from "@/components/homeSections/type";
-import { Category } from "@/contracts/category.type";
+import { AirdropType } from "@/contracts/airdropType.type";
 
 export default function Home() {
   const [searchActive, setSearchActive] = useState<string>("");
@@ -51,7 +51,7 @@ export default function Home() {
               {isLoading && <p>Loading types...</p>}
               {error && <p>Failed to load types.</p>}
 
-              {airdropTypes?.map((type: Category) => (
+              {airdropTypes?.map((type: AirdropType) => (
                 <Button
                   key={type.id}
                   onClick={() => setSearchActive(type.name.toLowerCase())}

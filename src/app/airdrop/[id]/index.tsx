@@ -32,7 +32,9 @@ interface Props{
 }
 const AirdropDetailsPage = ({params}:Props) => {
     const {id}=params;
-    const {data:airdrop}=useGetAirdropById(id) 
+    const {data:airdrop}=useGetAirdropById(id)
+    console.log("Airdrop ID:", id); 
+    console.log("Fetched Airdrop Data:", airdrop);
 
     console.log("Airdrop Details:", airdrop);
   const customColors = {

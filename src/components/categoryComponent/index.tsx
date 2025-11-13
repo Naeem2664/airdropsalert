@@ -9,6 +9,7 @@ import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import PageAddSection from "@/components/sections/adsSections/homeUpperAdSection/page";
 import { useGetAirdropsByCategories } from "@/hooks/getAirdrops";
 import { Airdrop } from "@/contracts/airdrop.type";
+import Link from "next/link";
 
 interface SlugParams 
     {
@@ -94,12 +95,15 @@ const CategoryPage = ({ slug }: SlugParams) => {
                         <Grid container spacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
                             {filteredAirdrops.map((airdrop, index) => (
                                 <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3 }} sx={{ display: "flex", justifyContent: "center",flex:"0 0 320px",maxWidth:"360px" }}>
+                                    <Link href={`/airdrop/${airdrop.id}`}>
                                     <AirdropCard
                                         {...airdrop}
                                         actions={airdrop.actions ?? undefined}
                                         airdrop_status={airdrop.airdrop_status ?? undefined}
                                         sx={{ width: "100%", height: "100%", maxWidth: "360px" }}
                                     />
+                                    </Link>
+                                    
                                 </Grid>
                             ))}
                         </Grid>
