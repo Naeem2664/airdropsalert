@@ -1,4 +1,14 @@
 // types/airdrops.type.ts
+export interface SocialLink {
+  platform: string;
+  url: string;
+}
+
+export interface Detail {
+  title: string;
+  content: string;
+}
+
 export interface Airdrop {
     id: string;
     name: string;
@@ -15,9 +25,9 @@ export interface Airdrop {
     estimated_value: string | null;
     tokens_per_claim: string | null;
     total_participants: string | null;
-    social_links: Record<string, string>[];
+    social_links: SocialLink[];
     listing_date: string | null;
-    details: Record<string, unknown>[];
+    details: Detail[];
     obj_id: string | null;
     is_active: boolean;
     created_at: string;

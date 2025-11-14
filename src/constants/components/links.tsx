@@ -16,13 +16,10 @@ export const navLinks = [
 
  export  const footerLinks = [
     { name: "Home", href: "/" },
-    { name: "DePIN", href: "/depin" },
-    { name: "AI", href: "/ai" },
-    { name: "DeSci", href: "/desci" },
-    { name: "About", href: "/about" },
+    { name: "About Us", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms-conditions" },
   ];
 
  export  const socialLinks = [

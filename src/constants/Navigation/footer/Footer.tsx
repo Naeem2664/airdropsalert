@@ -20,7 +20,7 @@ const Footer = () => {
       }}>
         <Grid container spacing={4}>
           {/* Brand Column */}
-          <Grid size={{ xs: 12, md: 4 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <Link href="/" underline="none">
               <Typography 
                 variant="h4" 
@@ -63,7 +63,7 @@ const Footer = () => {
               Quick Links
             </Typography>
             <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-              {footerLinks.slice(0, 4).map((link) => (
+              {footerLinks.map((link) => (
                 <Box component="li" key={link.name} sx={{ mb: 1 }}>
                   <Link
                     href={link.href}
@@ -81,34 +81,8 @@ const Footer = () => {
               ))}
             </Box>
           </Grid>
-
-          {/* Resources */}
-          <Grid size={{ xs: 6, md: 2 }}>
-            <Typography variant="h6" color="white" sx={{ mb: 2, fontWeight: 600 }}>
-              Resources
-            </Typography>
-            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-              {footerLinks.slice(4).map((link) => (
-                <Box component="li" key={link.name} sx={{ mb: 1 }}>
-                  <Link
-                    href={link.href}
-                    underline="hover"
-                    sx={{
-                      color: 'grey.400',
-                      '&:hover': {
-                        color: colors.primaryGreen
-                      }
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                </Box>
-              ))}
-            </Box>
-          </Grid>
-
           {/* Newsletter */}
-          <Grid  size={{ xs: 12, md: 4 }}>
+          <Grid  size={{ xs: 12, md: 7 }}>
             <Typography variant="h6" color="white" sx={{ mb: 2, fontWeight: 600 }}>
               Stay Updated
             </Typography>
