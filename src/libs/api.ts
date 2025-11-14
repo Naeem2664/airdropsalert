@@ -47,6 +47,16 @@ export async function fetchAirdropById(id: string): Promise<Airdrop | null> {
 
   return data as Airdrop | null;
 }
+export async function fetchAirdropsByPlatform(platform: string): Promise<Airdrop[]> {
+  const { data, error } = await supabase
+    .from("airdrops")
+    .select("*")
+    .eq("platform_slug", platform)
+    .order("created_at", { ascending: false });
+  console.log("Fetched airdrops by platform:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return (data as Airdrop[]) || [];
+}
 
 
 export async function fetchCategories(): Promise<Category[]> {

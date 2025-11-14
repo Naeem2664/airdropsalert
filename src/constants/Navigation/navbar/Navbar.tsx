@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { 
   AppBar,
   Toolbar,
@@ -73,40 +73,96 @@ const Navbar = () => {
           <Link href="/" passHref>
             <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Home</Button>
           </Link>
+          
+          {/* Categories Dropdown */}
           <Button
-            sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}
+            sx={{ 
+              color: '#10B981', 
+              fontSize: '1.125rem', 
+              fontWeight: '600', 
+              textTransform: 'none', 
+              '&:hover': { 
+                color: '#0ea371', 
+                backgroundColor: 'transparent' 
+              },
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.5
+            }}
             onClick={handleMenuOpen}
+            endIcon={<ChevronDown size={20} />}
           >
             Categories
           </Button>
+          
           <MuiMenu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
-            MenuListProps={{ sx: { backgroundColor: '#000000', color: '#10B981' } }}
+            MenuListProps={{ 
+              sx: { 
+                backgroundColor: '#1a1a1a', 
+                color: '#10B981',
+                minWidth: '200px',
+                border: '1px solid #10B981',
+                borderRadius: '8px',
+                py: 0
+              } 
+            }}
+            PaperProps={{
+              sx: {
+                backgroundColor: '#1a1a1a',
+                border: '1px solid #10B981',
+                borderRadius: '8px',
+                mt: 1,
+                overflow: 'hidden'
+              }
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             {(categories ?? []).map((link) => (
-              <MenuItem key={link.name} onClick={handleMenuClose}>
-                <Link href={`/categories/${link.slug}`} key={link.slug} passHref>
-                  <Button sx={{ color: '#10B981', textTransform: 'none' }}>
-                    {link.name}
-                  </Button>
+              <MenuItem 
+                key={link.name} 
+                onClick={handleMenuClose}
+                sx={{ 
+                  color: '#10B981',
+                  py: 1.5,
+                  px: 2,
+                  borderBottom: '1px solid #2d3748',
+                  '&:last-child': {
+                    borderBottom: 'none'
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: '#0ea371'
+                  }
+                }}
+              >
+                <Link 
+                  href={`/categories/${link.slug}`} 
+                  style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    width: '100%',
+                    display: 'block'
+                  }}
+                >
+                  {link.name}
                 </Link>
               </MenuItem>
             ))}
           </MuiMenu>
+
           <Link href="/about" passHref>
             <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>About Us</Button>
           </Link>
-          <Link href="/blog" passHref>
+          {/* <Link href="/blog" passHref>
             <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Blog</Button>
-          </Link>
+          </Link> */}
           <Link href="/contact" passHref>
             <Button sx={{ color: '#10B981', fontSize: '1.125rem', fontWeight: '600', textTransform: 'none', '&:hover': { color: '#0ea371', backgroundColor: 'transparent' } }}>Contact Us</Button>
           </Link>
-
-          {/* Dropdown for categories */}
-         
         </Box>
 
         {/* Mobile Menu Button */}
@@ -142,24 +198,101 @@ const Navbar = () => {
         <List>
           {/* Separate mobile buttons */}
           <Link href="/" passHref>
-            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Home</ListItemButton>
+            <ListItemButton 
+              onClick={() => setIsOpen(false)} 
+              sx={{ 
+                color: '#10B981', 
+                py: 2,
+                '&:hover': {
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: '#0ea371'
+                }
+              }}
+            >
+              Home
+            </ListItemButton>
           </Link>
+          
           <Link href="/about" passHref>
-            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>About Us</ListItemButton>
+            <ListItemButton 
+              onClick={() => setIsOpen(false)} 
+              sx={{ 
+                color: '#10B981', 
+                py: 2,
+                '&:hover': {
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: '#0ea371'
+                }
+              }}
+            >
+              About Us
+            </ListItemButton>
           </Link>
-          <Link href="/blog" passHref>
-            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Blog</ListItemButton>
-          </Link>
+          
+          {/* <Link href="/blog" passHref>
+            <ListItemButton 
+              onClick={() => setIsOpen(false)} 
+              sx={{ 
+                color: '#10B981', 
+                py: 2,
+                '&:hover': {
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: '#0ea371'
+                }
+              }}
+            >
+              Blog
+            </ListItemButton>
+          </Link> */}
+          
           <Link href="/contact" passHref>
-            <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>Contact Us</ListItemButton>
+            <ListItemButton 
+              onClick={() => setIsOpen(false)} 
+              sx={{ 
+                color: '#10B981', 
+                py: 2,
+                '&:hover': {
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: '#0ea371'
+                }
+              }}
+            >
+              Contact Us
+            </ListItemButton>
           </Link>
 
           <Divider sx={{ borderColor: '#1F2937', my: 1 }} />
 
-          {/* Categories mobile dropdown */}
+          {/* Categories section header */}
+          <ListItemButton 
+            sx={{ 
+              color: '#10B981', 
+              py: 2,
+              fontWeight: '600',
+              backgroundColor: 'rgba(16, 185, 129, 0.05)',
+              '&:hover': {
+                backgroundColor: 'rgba(16, 185, 129, 0.05)'
+              }
+            }}
+          >
+            Categories
+          </ListItemButton>
+
+          {/* Categories mobile items */}
           {(categories ?? []).map((link) => (
             <Link key={link.name} href={`/categories/${link.slug}`} passHref>
-              <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: '#10B981', py: 2 }}>
+              <ListItemButton 
+                onClick={() => setIsOpen(false)} 
+                sx={{ 
+                  color: '#10B981', 
+                  py: 2,
+                  pl: 4,
+                  '&:hover': {
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: '#0ea371'
+                  }
+                }}
+              >
                 {link.name}
               </ListItemButton>
             </Link>
