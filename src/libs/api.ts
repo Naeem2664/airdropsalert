@@ -4,7 +4,6 @@ import { Category } from "@/contracts/category.type";
 import { Platform } from "@/contracts/platform.type";
 import { AirdropType } from "@/contracts/airdropType.type";
 
-// Fetch all airdrops
 export async function fetchAirdrops(): Promise<Airdrop[]> {
   const { data, error } = await supabase
     .from("airdrops")
@@ -30,7 +29,6 @@ export const fetchAirdropsByCategories = async (
   return (data as Airdrop[]) || [];
 };
 
-// Fetch single airdrop by ID
 export async function fetchAirdropById(id: string): Promise<Airdrop | null> {
   if (!id) return null;
 
@@ -85,4 +83,24 @@ export async function fetchAirdrop_Type(): Promise<AirdropType[]> {
   console.log("Fetched airdrop types:", data);
   if (error) throw new Error(`Supabase fetch error: ${error.message}`);
   return (data as AirdropType[]) || [];
+}
+
+export async function postUserMessages(
+  name: string,
+  email: string,
+  phone: string,
+  message: string
+): Promise<void> {
+  const { error } = await supabase.from("contact_user").insert([
+    {
+      name,
+      email,
+      phone,
+      message,
+    },
+  ]);
+
+  if (error) {
+    throw new Error(`Supabase insert error: ${error.message}`);
+  }
 }

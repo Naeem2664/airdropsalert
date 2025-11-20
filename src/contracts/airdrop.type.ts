@@ -22,6 +22,7 @@ export interface Airdrop {
     total_distribution: string | null;
     platform: string | null;
     join_link: string | null;
+    description: string | null;
     estimated_value: string | null;
     tokens_per_claim: string | null;
     total_participants: string | null;
