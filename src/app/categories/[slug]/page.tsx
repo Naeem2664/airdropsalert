@@ -4,15 +4,14 @@ import { Metadata } from "next";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.vercel.app";
 
-export async function generateMetadata({
-  params,
-}: {
+interface PageProps {
   params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = params;
-  const airdrop = await fetchCategoryBySlug(slug);
+}
+export async function generateMetadata({ params}: {params:Promise<PageProps["params"]>| PageProps["params"];}): Promise<Metadata> {
+  const { slug } =  await params;
+  const category = await fetchCategoryBySlug(slug);
 
-  if (!airdrop) {
+  if (!category) {
     return {
       title: "Airdrop Not Found | Crypto Airdrops",
       description: "This airdrop does not exist. Discover other crypto airdrops and earn tokens.",
@@ -31,17 +30,17 @@ export async function generateMetadata({
     };
   }
 
-  const shortDescription = airdrop?.description
-    ? airdrop.description.length > 160
-      ? airdrop.description.substring(0, 157) + "..."
-      : airdrop.description
+  const shortDescription = category?.description
+    ? category.description.length > 160
+      ? category.description.substring(0, 157) + "..."
+      : category.description
     : "Stay updated with the latest crypto airdrops and claim free tokens.";
 
   return {
-    title: `${airdrop.name} Airdrop | Claim Free Crypto Tokens`,
+    title: `${category.name} Airdrop | Claim Free Crypto Tokens`,
     description: shortDescription,
     openGraph: {
-      title: `${airdrop.name} Airdrop`,
+      title: `${category.name} Airdrop`,
       description: shortDescription,
       url: `${BASE_URL}/categories/${slug}`,
       siteName: "Airdrops Alert",
@@ -49,15 +48,15 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${airdrop.name} Airdrop`,
+      title: `${category.name} Airdrop`,
       description: shortDescription,
     },
     alternates: { canonical: `${BASE_URL}/categories/${slug}` },
   };
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params; 
+export default async function Page({ params }: { params: Promise<PageProps["params"]> | PageProps["params"] }) {
+  const { slug } =await params; 
   return <CategoryPage slug={slug} />;
 }
  

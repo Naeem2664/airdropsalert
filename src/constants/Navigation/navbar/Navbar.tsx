@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { NoSsr } from "@mui/material";
+
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { 
@@ -20,7 +22,10 @@ import { useGetCategories } from "@/hooks/getCategories";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [isClient, setIsClient] = useState(false);
+useEffect(() => setIsClient(true), []);
   const { data: categories } = useGetCategories();
+  const categoriesList= categories ?? [];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -49,7 +54,6 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" passHref>
           <Button
-            component="a"
             sx={{
               fontSize: '1.875rem',
               fontWeight: '800',
@@ -121,7 +125,8 @@ const Navbar = () => {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            {(categories ?? []).map((link) => (
+            <NoSsr>
+            {isClient && categoriesList.map((link) => (
               <MenuItem 
                 key={link.name} 
                 onClick={handleMenuClose}
@@ -152,6 +157,8 @@ const Navbar = () => {
                 </Link>
               </MenuItem>
             ))}
+            </NoSsr>
+           
           </MuiMenu>
 
           <Link href="/about" passHref>
@@ -279,7 +286,8 @@ const Navbar = () => {
           </ListItemButton>
 
           {/* Categories mobile items */}
-          {(categories ?? []).map((link) => (
+          <NoSsr>
+          {isClient && categoriesList.map((link) => (
             <Link key={link.name} href={`/categories/${link.slug}`} passHref>
               <ListItemButton 
                 onClick={() => setIsOpen(false)} 
@@ -297,6 +305,8 @@ const Navbar = () => {
               </ListItemButton>
             </Link>
           ))}
+          </NoSsr>
+         
         </List>
       </Drawer>
     </AppBar>

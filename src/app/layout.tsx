@@ -6,6 +6,7 @@ import Footer from "@/constants/Navigation/footer/Footer";
 import { Roboto_Mono } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
 import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -77,6 +78,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${robotoMono.variable} antialiased`}>
         <div className="pt-[100px]">
+          <ThemeRegistry >
           <Providers>
             <Navbar />
               <CryptoPriceTicker />
@@ -84,6 +86,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </Providers>
+          </ThemeRegistry>
         </div>
 
         {/* Toast container for global notifications */}
