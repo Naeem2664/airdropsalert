@@ -66,6 +66,17 @@ export async function fetchCategories(): Promise<Category[]> {
   if (error) throw new Error(`Supabase fetch error: ${error.message}`);
   return (data as Category[]) || [];
 }
+
+export async function fetchCategoryBySlug(slug: string): Promise<Category | null> {
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+  console.log("Fetched category by slug:", data);
+  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  return (data as Category) || null;
+}
 export async function fetchPlatforms(): Promise<Platform[]> {
   const { data, error } = await supabase
     .from("platforms")

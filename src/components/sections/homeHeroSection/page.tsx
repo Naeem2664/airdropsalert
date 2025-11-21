@@ -1,33 +1,9 @@
 import React from "react";
 import { Box, Typography, Button, Paper } from "@mui/material";
 import { fetchAirdrops } from "../../../libs/api"; // server-side fetch
-import type { Metadata } from "next";
 import Link from "next/link";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const allAirdrops = await fetchAirdrops();
-  const sponsored = allAirdrops.find((a) => a.sponsored);
 
-  return {
-    title: sponsored
-      ? `Claim ${sponsored.name} – Sponsored Crypto Airdrop | AirdropX`
-      : "Discover the Latest Crypto Airdrops – AirdropX",
-    description: sponsored
-      ? `${sponsored.name} is a sponsored airdrop. ${sponsored.description} Get up to ${sponsored.total_distribution} tokens!`
-      : "Stay ahead in Web3 with real-time updates on top airdrops from DeFi, AI, DeSci, DePIN, and Solana.",
-    openGraph: {
-      title: sponsored
-        ? `Claim ${sponsored.name} – Sponsored Crypto Airdrop | AirdropX`
-        : "Discover the Latest Crypto Airdrops – AirdropX",
-      description: sponsored
-        ? `${sponsored.name} is a sponsored airdrop. ${sponsored.description} Get up to ${sponsored.total_distribution} tokens!`
-        : "Stay ahead in Web3 with real-time updates on top airdrops from DeFi, AI, DeSci, DePIN, and Solana.",
-      url: "https://yourdomain.com/airdrops",
-      siteName: "AirdropX",
-      type: "website",
-    },
-  };
-}
 
 export default async function Page() {
   const allAirdrops = await fetchAirdrops();

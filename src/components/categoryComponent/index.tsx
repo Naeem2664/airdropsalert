@@ -12,12 +12,12 @@ import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { SearchIcon } from "lucide-react";
 import { useState, useMemo } from "react";
 import Grid from "@mui/material/Grid";
-import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import PageAddSection from "@/components/sections/adsSections/homeUpperAdSection/page";
 import { useGetAirdropsByCategories } from "@/hooks/getAirdrops";
 import { Airdrop } from "@/contracts/airdrop.type";
 import Link from "next/link";
 import { useGetPlatforms } from "@/hooks/getPlatforms";
+import { useGetCategories } from "@/hooks/getCategories";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface SlugParams {
@@ -39,6 +39,9 @@ const CategoryPage = ({ slug }: SlugParams) => {
   
   const { data: airdrops, isLoading } = useGetAirdropsByCategories(slug);
   const { data: platforms} = useGetPlatforms();
+  const { data: categories } = useGetCategories();
+
+  const category = categories?.find(c => c.slug === slug);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +84,6 @@ const CategoryPage = ({ slug }: SlugParams) => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <CryptoPriceTicker />
 
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
         {/* Top Ad Section */}
@@ -103,7 +105,11 @@ const CategoryPage = ({ slug }: SlugParams) => {
               component="h2"
               sx={{ fontWeight: 600, color: "#10B981", mb: 1 }}
             >
-              {slug.toUpperCase()} Projects
+              {category?.name?.toUpperCase() || slug.toUpperCase()} Projects
+            </Typography>
+
+            <Typography variant="body1" sx={{ color: "grey.400", mb: 2 }}>
+              {category?.description}
             </Typography>
 
             {/* Search and Filter Section */}

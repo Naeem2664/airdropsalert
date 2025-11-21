@@ -2,23 +2,21 @@
 
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import { useGetAirdrops } from "@/hooks/getAirdrops";
-import { useGetCategories } from "@/hooks/getCategories";
-import { useGetAirdropType } from "@/hooks/getAirdropType";
 import AirdropTypeSection from "@/components/homeSections/type";
 import { AirdropType } from "@/contracts/airdropType.type";
+import { Airdrop } from "@/contracts/airdrop.type";
+import { Category } from "@/contracts/category.type";
+import { useEffect } from "react";
 
-export default function Home() {
+export default function Home({airdrops,categories,airdropTypes}: {airdrops:Airdrop[],categories:Category[],airdropTypes:AirdropType[]}) {
   const [searchActive, setSearchActive] = useState<string>("");
-
-  const { data: airdrops } = useGetAirdrops();
-  const { data: categories } = useGetCategories();
-  const { data: airdropTypes, isLoading, error } = useGetAirdropType();
-
   // Set default active tab after data is loaded
-  if (!searchActive && airdropTypes && airdropTypes.length > 0) {
-    setSearchActive(airdropTypes[0].name.toLowerCase());
-  }
+  useEffect(() => {
+    if (airdropTypes?.length) {
+      setSearchActive(airdropTypes[0].name.toLowerCase());
+    }
+  }, [airdropTypes]);
+  
 
   return (
     <>
@@ -48,8 +46,6 @@ export default function Home() {
                 py: 4,
               }}
             >
-              {isLoading && <p>Loading types...</p>}
-              {error && <p>Failed to load types.</p>}
 
               {airdropTypes?.map((type: AirdropType) => (
                 <Button

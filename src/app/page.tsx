@@ -1,30 +1,55 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/sections/homeHeroSection/page";
 import { Box } from "@mui/material";
-import CryptoPriceTicker from "@/components/tickers/CryptoPriceTickers";
 import Airdrops from "@/components/homeSections/index";
+import { fetchAirdrops,fetchCategories,fetchAirdrop_Type} from "@/libs/api";
 
 export const metadata: Metadata = {
-  title: "Discover the Latest Crypto Airdrops – Airdrops Alert",
+  title: "Crypto Airdrops Tracker | Discover Latest Airdrops (DeFi, AI, Solana)",
   description:
-    "Stay ahead in Web3 with real-time updates on the top crypto airdrops from DeFi, AI, DeSci, DePIN, and Solana,Polygon, Ethereum, Base, Arbitrum, Optimism, Avalanche, Gnosis, and more. Claim the latest sponsored airdrops now!",
+    "Discover top crypto airdrops from DeFi, AI, DeSci, DePIN, Solana, Base, Polygon and more. Stay ahead with real-time updates, filters and sponsored opportunities.",
+  keywords: [
+    "crypto airdrops",
+    "airdrop tracker",
+    "best crypto airdrops",
+    "DeFi airdrops",
+    "Solana airdrop",
+    "Base airdrop",
+    "free crypto",
+  ],
   openGraph: {
-    title: "Discover the Latest Crypto Airdrops – Airdrops Alert",
+    title: "Crypto Airdrops Tracker – Latest Free Airdrops",
     description:
-      "Stay ahead in Web3 with real-time updates on the top crypto airdrops from DeFi, AI, DeSci, DePIN, and Solana. Claim the latest sponsored airdrops now!",
+      "Track the best upcoming and ongoing crypto airdrops. Explore by category, chain or type. Real-time updates.",
     url: "https://airdropsalert.vercel.app",
     siteName: "Airdrops Alert",
+    images: [
+      {
+        url: "https://airdropsalert.vercel.app/og-home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Crypto Airdrops Overview",
+      },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Discover the Latest Crypto Airdrops – AirdropX",
+    title: "Crypto Airdrops Tracker",
     description:
-      "Stay ahead in Web3 with real-time updates on the top crypto airdrops from DeFi, AI, DeSci, DePIN, and Solana. Claim the latest sponsored airdrops now!",
+      "Discover top crypto airdrops from DeFi, AI, Solana, Base, Polygon and more.",
+    images: ["https://airdropsalert.vercel.app/og-home.jpg"],
+  },
+  alternates: {
+    canonical: "https://airdropsalert.vercel.app",
   },
 };
 
-export default function HomePage() {
+
+export default async function HomePage() {
+  const airdrops=await fetchAirdrops();
+  const categories=await fetchCategories();
+  const airdropTypes=await fetchAirdrop_Type();
   return (
     <>
       <Box
@@ -35,12 +60,28 @@ export default function HomePage() {
           justifyContent: "center",
         }}
       >
-        <CryptoPriceTicker />
         <HeroSection />
       </Box>
       <Box>
-        <Airdrops />
+        <Airdrops airdrops={airdrops} categories={categories} airdropTypes={airdropTypes}/>
       </Box>
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Airdrops Alert",
+      url: "https://airdropsalert.vercel.app",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://airdropsalert.vercel.app/?search={search_term}",
+        "query-input": "required name=search_term",
+      },
+    }),
+  }}
+/>
+
     </>
   );
 }
