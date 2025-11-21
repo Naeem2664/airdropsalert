@@ -2,7 +2,6 @@ import CategoryPage from "@/components/categoryComponent";
 import { fetchCategoryBySlug, } from "@/libs/api";
 import { Metadata } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.vercel.app";
 
 
 interface Params {
@@ -19,15 +18,12 @@ export async function generateMetadata({ params}: {params: Params;}): Promise<Me
       openGraph: {
         title: "Airdrop Not Found",
         description: "This airdrop does not exist. Discover other crypto airdrops and earn tokens.",
-        images: [`${BASE_URL}/default-og-image.jpg`],
       },
       twitter: {
         card: "summary_large_image",
         title: "Airdrop Not Found",
         description: "This airdrop does not exist. Discover other crypto airdrops and earn tokens.",
-        images: [`${BASE_URL}/default-og-image.jpg`],
       },
-      alternates: { canonical: `${BASE_URL}/` },
     };
   }
 
@@ -43,7 +39,6 @@ export async function generateMetadata({ params}: {params: Params;}): Promise<Me
     openGraph: {
       title: `${category.name} Airdrop`,
       description: shortDescription,
-      url: `${BASE_URL}/categories/${slug}`,
       siteName: "Airdrops Alert",
       type: "website",
     },
@@ -52,7 +47,6 @@ export async function generateMetadata({ params}: {params: Params;}): Promise<Me
       title: `${category.name} Airdrop`,
       description: shortDescription,
     },
-    alternates: { canonical: `${BASE_URL}/categories/${slug}` },
   };
 }
 

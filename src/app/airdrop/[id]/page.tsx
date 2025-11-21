@@ -33,7 +33,6 @@ interface SocialLink {
   url: string;
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.vercel.app";
 
 export async function generateMetadata({
   params,
@@ -50,16 +49,12 @@ export async function generateMetadata({
       openGraph: {
         title: "Airdrop Not Found",
         description: "This airdrop does not exist. Discover other crypto airdrops and earn tokens.",
-        url: `${BASE_URL}/airdrop/${id}`,
-        images: [`${BASE_URL}/default-og-image.jpg`],
       },
       twitter: {
         card: "summary_large_image",
         title: "Airdrop Not Found",
         description: "This airdrop does not exist. Discover other crypto airdrops and earn tokens.",
-        images: [`${BASE_URL}/default-og-image.jpg`],
       },
-      alternates: { canonical: `${BASE_URL}/airdrop/${id}` },
     };
   }
 
@@ -75,8 +70,6 @@ export async function generateMetadata({
     openGraph: {
       title: `${airdrop.name} Airdrop`,
       description: shortDescription,
-      url: `${BASE_URL}/airdrop/${id}`,
-      images: airdrop.image_urls?.length ? airdrop.image_urls : [`${BASE_URL}/default-og-image.jpg`],
       siteName: "Airdrops Alert",
       type: "website",
     },
@@ -84,9 +77,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${airdrop.name} Airdrop`,
       description: shortDescription,
-      images: airdrop.image_urls?.length ? airdrop.image_urls : [`${BASE_URL}/default-og-image.jpg`],
     },
-    alternates: { canonical: `${BASE_URL}/airdrop/${id}` },
   };
 }
 
@@ -116,19 +107,15 @@ export default async function Page({ params }: { params:Params}) {
     "@context": "https://schema.org",
     "@type": "Event",
     name: airdrop.name,
-    url: `${BASE_URL}/airdrop/${id}`,
     description: airdrop.description ?? "",
-    image: airdrop.image_urls ?? [`${BASE_URL}/default-og-image.jpg`],
     startDate: airdrop.listing_date ?? undefined,
     eventStatus: airdrop.airdrop_status ?? "Active",
     offers: {
       "@type": "Offer",
-      url: airdrop.join_link ?? `${BASE_URL}/airdrop/${id}`,
     },
     organizer: {
       "@type": "Organization",
       name: "Airdrops Alert",
-      url: BASE_URL,
     },
   };
 
