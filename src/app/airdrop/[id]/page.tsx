@@ -24,22 +24,19 @@ interface Detail {
   title: string;
   content: string;
 }
-interface Params {
-  id: string;
-}
 
 interface SocialLink {
   platform: string;
   url: string;
 }
 
-
+// Update the metadata function to await params
 export async function generateMetadata({
   params,
 }: {
-  params:Params
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { id } = params;
+  const { id } = await params; // Await the params
   const airdrop = await fetchAirdropById(id);
 
   if (!airdrop) {
@@ -81,8 +78,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params:Params}) {
-  const { id } = params;
+// Update the main component to await params
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params; // Await the params
   const airdrop = await fetchAirdropById(id);
 
   if (!airdrop) {
@@ -279,4 +281,3 @@ export default async function Page({ params }: { params:Params}) {
     </>
   );
 }
-

@@ -4,11 +4,9 @@ import { Metadata } from "next";
 
 
 
-interface Params {
-  slug: string;
-}
-export async function generateMetadata({ params}: {params: Params;}): Promise<Metadata> {
-  const { slug } = params;
+
+export async function generateMetadata({ params}: {params: Promise<{ slug: string }>;}): Promise<Metadata> {
+  const { slug } = await params;
   const category = await fetchCategoryBySlug(slug);
 
   if (!category) {
@@ -50,8 +48,8 @@ export async function generateMetadata({ params}: {params: Params;}): Promise<Me
   };
 }
 
-export default async function Page({ params }: { params:Params }) {
-  const { slug } = params; 
+export default async function Page({ params }: { params:Promise<{ slug: string }> }) {
+  const { slug } =await params; 
   return <CategoryPage slug={slug} />;
 }
  
