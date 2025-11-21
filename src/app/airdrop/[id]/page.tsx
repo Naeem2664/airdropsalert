@@ -40,7 +40,7 @@ export async function generateMetadata({
 }: {
   params:Params
 }): Promise<Metadata> {
-  const { id } = params;
+  const { id } =await params;
   const airdrop = await fetchAirdropById(id);
 
   if (!airdrop) {
@@ -91,7 +91,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params:Params}) {
-  const { id } = params;
+  const { id } =await params;
   const airdrop = await fetchAirdropById(id);
 
   if (!airdrop) {
