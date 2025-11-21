@@ -29,7 +29,7 @@ export const fetchAirdropsByCategories = async (
   return (data as Airdrop[]) || [];
 };
 
-export async function fetchAirdropById(id: string | undefined): Promise<Airdrop | null> {
+export async function fetchAirdropById(id: string): Promise<Airdrop | null> {
   if (!id) return null;
 
   const { data, error } = await supabase

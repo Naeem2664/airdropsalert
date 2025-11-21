@@ -24,8 +24,8 @@ interface Detail {
   title: string;
   content: string;
 }
-interface PageProps {
-  params: { id: string  };
+interface Params {
+  id: string;
 }
 
 interface SocialLink {
@@ -38,7 +38,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.verc
 export async function generateMetadata({
   params,
 }: {
-  params:PageProps["params"]
+  params:Params
 }): Promise<Metadata> {
   const { id } = params;
   const airdrop = await fetchAirdropById(id);
@@ -90,7 +90,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params:PageProps["params"]}) {
+export default async function Page({ params }: { params:Params}) {
   const { id } = params;
   const airdrop = await fetchAirdropById(id);
 

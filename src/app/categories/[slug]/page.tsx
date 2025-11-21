@@ -4,10 +4,11 @@ import { Metadata } from "next";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.vercel.app";
 
-interface PageProps {
-  params: { slug: string };
+
+interface Params {
+  slug: string;
 }
-export async function generateMetadata({ params}: {params: PageProps["params"];}): Promise<Metadata> {
+export async function generateMetadata({ params}: {params: Params;}): Promise<Metadata> {
   const { slug } = params;
   const category = await fetchCategoryBySlug(slug);
 
@@ -55,7 +56,7 @@ export async function generateMetadata({ params}: {params: PageProps["params"];}
   };
 }
 
-export default async function Page({ params }: { params:PageProps["params"] }) {
+export default async function Page({ params }: { params:Params }) {
   const { slug } = params; 
   return <CategoryPage slug={slug} />;
 }

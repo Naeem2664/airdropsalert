@@ -58,11 +58,6 @@ export const metadata: Metadata = {
     description: "A brief yet descriptive summary of your website's content and purpose.",
     images: [`${siteUrl}/og-image.jpg`],
   },
-  // 4. Ensures proper scaling on mobile devices
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
   // 5. Adds a default canonical URL
   alternates: {
     canonical: siteUrl,
@@ -76,6 +71,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={`${robotoMono.variable} antialiased`}>
         <div className="pt-[100px]">
           <ThemeRegistry >
