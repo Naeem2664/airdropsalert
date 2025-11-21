@@ -7,8 +7,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://airdropsalert.verc
 interface PageProps {
   params: { slug: string };
 }
-export async function generateMetadata({ params}: {params:Promise<PageProps["params"]>| PageProps["params"];}): Promise<Metadata> {
-  const { slug } =  await params;
+export async function generateMetadata({ params}: {params: PageProps["params"];}): Promise<Metadata> {
+  const { slug } = params;
   const category = await fetchCategoryBySlug(slug);
 
   if (!category) {
@@ -55,8 +55,8 @@ export async function generateMetadata({ params}: {params:Promise<PageProps["par
   };
 }
 
-export default async function Page({ params }: { params: Promise<PageProps["params"]> | PageProps["params"] }) {
-  const { slug } =await params; 
+export default async function Page({ params }: { params:PageProps["params"] }) {
+  const { slug } = params; 
   return <CategoryPage slug={slug} />;
 }
  
