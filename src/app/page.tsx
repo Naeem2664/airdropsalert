@@ -2,20 +2,21 @@ import type { Metadata } from "next";
 import HeroSection from "@/components/sections/homeHeroSection/page";
 import { Box } from "@mui/material";
 import Airdrops from "@/components/homeSections/index";
-import { fetchAirdrops,fetchCategories,fetchAirdrop_Type} from "@/libs/api";
+import { fetchAirdrops, fetchCategories, fetchAirdrop_Type } from "@/libs/api";
 
 export const metadata: Metadata = {
-  title: "Crypto Airdrops Tracker | Discover Latest Airdrops (DeFi, AI, Solana)",
+  title:
+    "Crypto Airdrops Tracker | Discover Latest Airdrops (DeFi, AI, Solana)",
   description:
     "Discover top crypto airdrops from DeFi, AI, DeSci, DePIN, Solana, Base, Polygon and more. Stay ahead with real-time updates, filters and sponsored opportunities.",
   keywords: [
     "crypto airdrops",
     "airdrop tracker",
-    "best crypto airdrops",
+    "best crypto airdrops 2026",
     "DeFi airdrops",
     "Solana airdrop",
     "Base airdrop",
-    "free crypto",
+    "free crypto airdrops",
   ],
   openGraph: {
     title: "Crypto Airdrops Tracker – Latest Free Airdrops",
@@ -45,11 +46,10 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default async function HomePage() {
-  const airdrops=await fetchAirdrops();
-  const categories=await fetchCategories();
-  const airdropTypes=await fetchAirdrop_Type();
+  const airdrops = await fetchAirdrops();
+  const categories = await fetchCategories();
+  const airdropTypes = await fetchAirdrop_Type();
   return (
     <>
       <Box
@@ -63,25 +63,28 @@ export default async function HomePage() {
         <HeroSection />
       </Box>
       <Box>
-        <Airdrops airdrops={airdrops} categories={categories} airdropTypes={airdropTypes}/>
+        <Airdrops
+          airdrops={airdrops}
+          categories={categories}
+          airdropTypes={airdropTypes}
+        />
       </Box>
       <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Airdrops Alert",
-      url: "https://airdropsalert.vercel.app",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://airdropsalert.vercel.app/?search={search_term}",
-        "query-input": "required name=search_term",
-      },
-    }),
-  }}
-/>
-
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Airdrops Alert",
+            url: "https://airdropsalert.vercel.app",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://airdropsalert.vercel.app/?search={search_term}",
+              "query-input": "required name=search_term",
+            },
+          }),
+        }}
+      />
     </>
   );
 }
