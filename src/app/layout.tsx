@@ -14,7 +14,7 @@ const robotoMono = Roboto_Mono({
   weight: ["400", "700"],
 });
 
-const siteUrl = "https://www.yourwebsite.com"; // Replace with your actual domain
+const siteUrl = "https://www.airdropsalert.com"; // Replace with your actual domain
 
 // --- SEO Optimizations ---
 
@@ -22,30 +22,35 @@ const siteUrl = "https://www.yourwebsite.com"; // Replace with your actual domai
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Your Website Name: Catchy Tagline",
-    template: "%s | Your Website Name", // Suffix for individual page titles
+    default: "AirdropsAlert: Stay Updated with Latest Crypto Airdrops",
+    template: "%s | AirdropsAlert", // Suffix for individual page titles
   },
   description:
-    "A brief yet descriptive summary of your website's content and purpose. Use relevant keywords.",
+    "Stay updated with the latest crypto airdrops and earn free tokens.",
   keywords: [
-    "keyword1",
-    "keyword2",
-    "keyword3",
+    "crypto airdrops",
+    "free crypto",
+    "blockchain rewards",
+    "airdrop alerts",
+    "cryptocurrency",
+    "airdrop",
+    "crypto",
+    "web3"
   ],
-  authors: [{ name: "Your Name or Company", url: siteUrl }],
-  creator: "Your Name or Company",
+  authors: [{ name: "AirdropsAlert Team", url: siteUrl }],
+  creator: "AirdropsAlert Team",
   // 2. Open Graph (Social Sharing) metadata for better previews
   openGraph: {
-    title: "Your Website Name: Catchy Tagline",
-    description: "A brief yet descriptive summary of your website's content and purpose.",
+    title: "AirdropsAlert: Stay Updated with Latest Crypto Airdrops",
+    description: "Stay updated with the latest crypto airdrops and earn free tokens.",
     url: siteUrl,
-    siteName: "Your Website Name",
+    siteName: "AirdropsAlert",
     images: [
       {
-        url: `${siteUrl}/og-image.jpg`, // Add an Open Graph image file in your public directory
+        url: `${siteUrl}/assets/images/airdrop.jpg`, // Add an Open Graph image file in your public directory
         width: 1200,
         height: 630,
-        alt: "Your Website Name",
+        alt: "AirdropsAlert Logo",
       },
     ],
     locale: "en_US",
@@ -54,9 +59,9 @@ export const metadata: Metadata = {
   // 3. Twitter metadata (often uses the same info as Open Graph)
   twitter: {
     card: "summary_large_image",
-    title: "Your Website Name: Catchy Tagline",
-    description: "A brief yet descriptive summary of your website's content and purpose.",
-    images: [`${siteUrl}/og-image.jpg`],
+    title: "AirdropsAlert: Stay Updated with Latest Crypto Airdrops",
+    description: "Stay updated with the latest crypto airdrops and earn free tokens.",
+    images: [`${siteUrl}/assets/images/airdrop.jpg`],
   },
   // 5. Adds a default canonical URL
   alternates: {
@@ -72,6 +77,33 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "AirdropsAlert",
+            "url": "https://www.airdropsalert.com",
+            "logo": "https://www.airdropsalert.com/assets/images/airdrop.jpg",
+            "sameAs": [
+              // Add social media profiles here if available
+              // "https://twitter.com/airdropsalert",
+              // "https://facebook.com/airdropsalert"
+            ]
+          })
+        }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "AirdropsAlert",
+            "url": "https://www.airdropsalert.com",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.airdropsalert.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })
+        }} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${robotoMono.variable} antialiased`}>

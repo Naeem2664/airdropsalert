@@ -1,5 +1,5 @@
 import CategoryPage from "@/components/categoryComponent";
-import { fetchCategoryBySlug, } from "@/libs/api";
+import { fetchCategoryBySlug,fetchCategories } from "@/libs/api";
 import { Metadata } from "next";
 
 
@@ -25,6 +25,7 @@ export async function generateMetadata({ params}: {params: Promise<{ slug: strin
     };
   }
 
+ 
   const shortDescription = category?.description
     ? category.description.length > 160
       ? category.description.substring(0, 157) + "..."
@@ -37,17 +38,35 @@ export async function generateMetadata({ params}: {params: Promise<{ slug: strin
     openGraph: {
       title: `${category.name} Airdrop`,
       description: shortDescription,
-      siteName: "Airdrops Alert",
+      siteName: "AirdropsAlert",
       type: "website",
+      images: [
+        {
+          url: "https://www.airdropsalert.com/assets/images/airdrop.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${category.name} Category Image`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${category.name} Airdrop`,
       description: shortDescription,
+      images: ["https://www.airdropsalert.com/assets/images/airdrop.jpg"],
+    },
+    alternates: {
+      canonical: `https://www.airdropsalert.com/categories/${slug}`,
     },
   };
 }
 
+export async function generateStaticParams() {
+  const categories = await fetchCategories();
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+  }));
+}
 export default async function Page({ params }: { params:Promise<{ slug: string }> }) {
   const { slug } =await params; 
   return <CategoryPage slug={slug} />;

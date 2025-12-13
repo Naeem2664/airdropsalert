@@ -1,6 +1,6 @@
 "use client";
 import { Box, Typography, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 
 interface CryptoPrice {
@@ -15,7 +15,7 @@ const CryptoPriceTicker = () => {
   const [loading, setLoading] = useState(true);
 
   // Default prices for fallback
-  const defaultPrices: CryptoPrice[] = [
+  const defaultPrices: CryptoPrice[] = useMemo(() => [
     { symbol: "BTC", price: "$67,122.00", change: "0.00%" },
     { symbol: "ETH", price: "$3,415.02", change: "-0.05%" },
     { symbol: "BNB", price: "$585.78", change: "-0.15%" },
@@ -34,7 +34,7 @@ const CryptoPriceTicker = () => {
     { symbol: "ETC", price: "$31.40", change: "-0.05%" },
     { symbol: "XLM", price: "$0.115", change: "0.22%" },
     { symbol: "XMR", price: "$165.80", change: "0.15%" },
-  ];
+  ], []);
 
   // Fetch real prices from CoinGecko API
   useEffect(() => {
@@ -153,7 +153,7 @@ const CryptoPriceTicker = () => {
     fetchPrices();
     const interval = setInterval(fetchPrices, 30000); // Update every 30 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [defaultPrices]);
 
   if (loading && prices.length === 0) {
     return (

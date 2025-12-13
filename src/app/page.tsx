@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: "Crypto Airdrops Tracker – Latest Free Airdrops",
     description:
       "Track the best upcoming and ongoing crypto airdrops. Explore by category, chain or type. Real-time updates.",
-    url: "https://airdropsalert.vercel.app",
-    siteName: "Airdrops Alert",
+    url: "https://www.airdropsalert.com",
+    siteName: "AirdropsAlert",
     images: [
       {
-        url: "https://airdropsalert.vercel.app/og-home.jpg",
+        url: "https://www.airdropsalert.com/assets/images/airdrop.jpg",
         width: 1200,
         height: 630,
         alt: "Crypto Airdrops Overview",
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     title: "Crypto Airdrops Tracker",
     description:
       "Discover top crypto airdrops from DeFi, AI, Solana, Base, Polygon and more.",
-    images: ["https://airdropsalert.vercel.app/og-home.jpg"],
+    images: ["https://www.airdropsalert.com/assets/images/airdrop.jpg"],
   },
   alternates: {
-    canonical: "https://airdropsalert.vercel.app",
+    canonical: "https://www.airdropsalert.com",
   },
 };
 
@@ -75,11 +75,11 @@ export default async function HomePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            name: "Airdrops Alert",
-            url: "https://airdropsalert.vercel.app",
+            name: "AirdropsAlert",
+            url: "https://www.airdropsalert.com",
             potentialAction: {
               "@type": "SearchAction",
-              target: "https://airdropsalert.vercel.app/?search={search_term}",
+              target: "https://www.airdropsalert.com/?search={search_term}",
               "query-input": "required name=search_term",
             },
           }),
