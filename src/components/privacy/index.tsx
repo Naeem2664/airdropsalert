@@ -25,10 +25,9 @@ const PrivacyPolicyPage = () => {
   const lastUpdated = "December 1, 2024";
 
   return (
-    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
-      <PageAddSection />
+    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } ,mt:4}}>
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         sx={{
           py: 6,
           backgroundColor: customColors.primaryBlack,
@@ -85,7 +84,7 @@ const PrivacyPolicyPage = () => {
               paragraph
               sx={{ color: customColors.textSecondary, mb: 3 }}
             >
-              Welcome to AirdropX (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). We are committed to protecting your privacy
+              Welcome to AirdropsAlert (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). We are committed to protecting your privacy
               and ensuring the security of your personal information. This Privacy Policy explains how
               we collect, use, disclose, and safeguard your information when you use our cryptocurrency
               airdrop platform.
@@ -94,7 +93,7 @@ const PrivacyPolicyPage = () => {
               paragraph
               sx={{ color: customColors.textSecondary }}
             >
-              By accessing or using AirdropX, you agree to the terms of this Privacy Policy. If you do 
+              By accessing or using AirdropsAlert, you agree to the terms of this Privacy Policy. If you do 
               not agree with the terms, please do not access the platform.
             </Typography>
           </Box>
@@ -455,13 +454,13 @@ const PrivacyPolicyPage = () => {
             </Typography>
             <Box sx={{ color: customColors.textSecondary }}>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Email: privacy@airdropx.com
+                Email: privacy@airdropsalert.com
               </Typography>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Discord: AirdropX Support
+                Discord: AirdropsAlert Support
               </Typography>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Twitter: @AirdropX_Support
+                Twitter: @AirdropsAlert_Support
               </Typography>
             </Box>
           </Box>
@@ -476,12 +475,11 @@ const PrivacyPolicyPage = () => {
               fontStyle: 'italic',
             }}
           >
-            This Privacy Policy is effective as of {lastUpdated}. By using AirdropX, you acknowledge 
+            This Privacy Policy is effective as of {lastUpdated}. By using AirdropsAlert, you acknowledge 
             that you have read and understood this Privacy Policy.
           </Typography>
         </Paper>
       </Container>
-      <PageAddSection />
     </Container>
   );
 };

@@ -25,10 +25,9 @@ const TermsAndConditionsPage = () => {
   const effectiveDate = "December 1, 2024";
 
   return (
-    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
-      <PageAddSection />
+    <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 }, mt: 4 }}>
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         sx={{
           py: 6,
           backgroundColor: customColors.primaryBlack,
@@ -85,7 +84,7 @@ const TermsAndConditionsPage = () => {
               paragraph
               sx={{ color: customColors.textSecondary, mb: 3 }}
             >
-              Welcome to AirdropX (Platform, we, us, or our). By accessing or using our 
+              Welcome to AirdropsAlert (Platform, we, us, or our). By accessing or using our 
               cryptocurrency airdrop platform, website, and related services (collectively, the Services), 
               you agree to be bound by these Terms and Conditions and our Privacy Policy.
             </Typography>
@@ -125,7 +124,7 @@ const TermsAndConditionsPage = () => {
               sx={{ color: customColors.textSecondary, mb: 3 }}
             >
               You must be at least 18 years old and have the legal capacity to enter into binding 
-              contracts in your jurisdiction to use our Services. By using AirdropX, you represent 
+              contracts in your jurisdiction to use our Services. By using AirdropsAlert, you represent 
               and warrant that you meet these requirements.
             </Typography>
 
@@ -274,10 +273,9 @@ const TermsAndConditionsPage = () => {
               paragraph
               sx={{ color: customColors.textSecondary, mb: 3 }}
             >
-              All content on the AirdropX platform, including but not limited to text, graphics, logos, 
-              images, and software, is our property or the property of our licensors and is protected 
-              by intellectual property laws.
-            </Typography>
+                          All content on the AirdropsAlert platform, including but not limited to text, graphics, logos, 
+                          images, and software, is our property or the property of our licensors and is protected 
+                          by intellectual property laws.            </Typography>
             <Typography
               paragraph
               sx={{ color: customColors.textSecondary }}
@@ -520,13 +518,13 @@ const TermsAndConditionsPage = () => {
             </Typography>
             <Box sx={{ color: customColors.textSecondary }}>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Email: legal@airdropx.com
+                Email: legal@airdropsalert.com
               </Typography>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Discord: AirdropX Legal Support
+                Discord: AirdropsAlert Legal Support
               </Typography>
               <Typography paragraph sx={{ color: customColors.textSecondary }}>
-                Twitter: @AirdropX_Official
+                Twitter: @AirdropsAlert_Official
               </Typography>
             </Box>
           </Box>
@@ -541,13 +539,12 @@ const TermsAndConditionsPage = () => {
               fontStyle: 'italic',
             }}
           >
-            By using AirdropX, you acknowledge that you have read, understood, and agree to be bound 
+            By using AirdropsAlert, you acknowledge that you have read, understood, and agree to be bound 
             by these Terms and Conditions. These terms constitute the entire agreement between you 
-            and AirdropX regarding your use of the Services.
+            and AirdropsAlert regarding your use of the Services.
           </Typography>
         </Paper>
       </Container>
-      <PageAddSection />
     </Container>
   );
 };

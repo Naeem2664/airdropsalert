@@ -73,13 +73,20 @@ export async function fetchCategories(): Promise<Category[]> {
 }
 
 export async function fetchCategoryBySlug(slug: string): Promise<Category | null> {
+  if (!slug) {
+    return null; // Return null if slug is empty or null
+  }
+
   const { data, error } = await supabase
     .from("categories")
     .select("*")
     .eq("slug", slug)
-    .single();
+    .maybeSingle(); // Use maybeSingle() here
 
-  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  if (error) {
+    console.error("Supabase fetch error:", error.message); // Log the error but don't throw
+    return null;
+  }
 
   return data ?? null;
 }

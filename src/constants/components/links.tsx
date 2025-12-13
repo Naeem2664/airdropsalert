@@ -20,6 +20,7 @@ export const navLinks = [
     { name: "Contact", href: "/contact" },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Terms & Conditions", href: "/terms-conditions" },
+    { name: "Disclaimer", href: "/disclaimer" },
   ];
 
  export  const socialLinks = [

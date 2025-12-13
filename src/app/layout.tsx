@@ -111,7 +111,7 @@ export default function RootLayout({
           <ThemeRegistry >
           <Providers>
             <Navbar />
-              <CryptoPriceTicker />
+            <CryptoPriceTicker />
             
             {children}
             <Footer />

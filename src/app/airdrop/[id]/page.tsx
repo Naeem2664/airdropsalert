@@ -299,21 +299,21 @@ export default async function Page({
                 </>
               )}
 
-              <Button
-                variant="contained"
-                fullWidth
-                size="large"
-                component={Link}
-                href={airdrop.join_link || "#"}
-                sx={{
-                  mt: 2,
-                  backgroundColor: customColors.primaryGreen,
-                  "&:hover": { backgroundColor: customColors.darkGreen },
-                }}
-                startIcon={<SwapIcon />}
-              >
-                Participate Now
-              </Button>
+              <Link href={airdrop.join_link || "#"} passHref>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  sx={{
+                    mt: 2,
+                    backgroundColor: customColors.primaryGreen,
+                    "&:hover": { backgroundColor: customColors.darkGreen },
+                  }}
+                  startIcon={<SwapIcon />}
+                >
+                  Participate Now
+                </Button>
+              </Link>
             </Paper>
           </Grid>
 
@@ -367,22 +367,22 @@ export default async function Page({
             ))}
 
             <Box textAlign="center" mt={6}>
-              <Button
-                variant="contained"
-                size="large"
-                component={Link}
-                href={airdrop.join_link || "#"}
-                rel="noopener noreferrer nofollow"
-                sx={{
-                  px: 6,
-                  py: 1.5,
-                  backgroundColor: customColors.primaryGreen,
-                  "&:hover": { backgroundColor: customColors.darkGreen },
-                }}
-                startIcon={<SwapIcon />}
-              >
-                Start Earning Now
-              </Button>
+              <Link href={airdrop.join_link || "#"} passHref>
+                <Button
+                  variant="contained"
+                  size="large"
+                  rel="noopener noreferrer nofollow"
+                  sx={{
+                    px: 6,
+                    py: 1.5,
+                    backgroundColor: customColors.primaryGreen,
+                    "&:hover": { backgroundColor: customColors.darkGreen },
+                  }}
+                  startIcon={<SwapIcon />}
+                >
+                  Start Earning Now
+                </Button>
+              </Link>
             </Box>
           </Grid>
         </Grid>

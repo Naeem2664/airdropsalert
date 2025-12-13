@@ -9,16 +9,6 @@ export default async function Page() {
   const allAirdrops = await fetchAirdrops();
   const sponsored = allAirdrops.find((a) => a.sponsored);
 
-  if (!sponsored) {
-    return (
-      <Box sx={{ textAlign: "center", color: "#ffffff", py: 10 }}>
-        <Typography variant="h2">
-          No sponsored airdrops available right now.
-        </Typography>
-      </Box>
-    );
-  }
-
   return (
     <Box
       sx={{
@@ -92,7 +82,8 @@ export default async function Page() {
 
       {/* Right Content */}
       <Box sx={{ width: { xs: "100%", lg: "50%" } }}>
-        <Paper
+        {/* Sponsored Airdrop Card */}
+        {sponsored?(<Paper
           sx={{
             borderRadius: "16px",
             p: { xs: 3, md: 4 },
@@ -191,7 +182,12 @@ export default async function Page() {
               }}
             />
           </Link>
-        </Paper>
+        </Paper>):( <Box sx={{ textAlign: "center", color: "#ffffff", py: 10 }}>
+        <Typography variant="h2">
+          No sponsored airdrops available right now.
+        </Typography>
+      </Box>)}
+        
       </Box>
     </Box>
   );
