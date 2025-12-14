@@ -33,7 +33,7 @@ const AirdropCard: React.FC<AirdropCardProps> = ({
 
   // Use first image as avatar or fallback to name initials
   const avatarContent = image_urls && image_urls.length > 0 
-    ? <Avatar src={image_urls[0]} sx={{ width: 60, height: 60 }} />
+    ? <Avatar src={image_urls[0]} alt={name} sx={{ width: 60, height: 60 }} />
     : <Avatar sx={{ width: 60, height: 60, bgcolor: 'warning.light', color: colors.primaryWhite }}>
         {name?.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
       </Avatar>;
