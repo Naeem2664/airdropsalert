@@ -2,6 +2,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { colors } from '@/utils/colors'; // Added missing import
 
 interface CryptoPrice {
   symbol: string;
@@ -11,10 +12,6 @@ interface CryptoPrice {
 
 const CryptoPriceTicker = () => {
   const theme = useTheme();
-  const [prices, setPrices] = useState<CryptoPrice[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // Default prices for fallback
   const defaultPrices: CryptoPrice[] = useMemo(() => [
     { symbol: "BTC", price: "$67,122.00", change: "0.00%" },
     { symbol: "ETH", price: "$3,415.02", change: "-0.05%" },
@@ -35,6 +32,9 @@ const CryptoPriceTicker = () => {
     { symbol: "XLM", price: "$0.115", change: "0.22%" },
     { symbol: "XMR", price: "$165.80", change: "0.15%" },
   ], []);
+
+  const [prices, setPrices] = useState<CryptoPrice[]>(defaultPrices); // Initialize with default prices
+  const [loading, setLoading] = useState(true);
 
   // Fetch real prices from CoinGecko API
   useEffect(() => {
@@ -155,25 +155,6 @@ const CryptoPriceTicker = () => {
     return () => clearInterval(interval);
   }, [defaultPrices]);
 
-  if (loading && prices.length === 0) {
-    return (
-      <Box
-        sx={{
-          width: "100%",
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          py: 1,
-          px: 2,
-          textAlign: "center",
-          backgroundColor: theme.palette.background.default,
-        }}
-      >
-        <Typography variant="body2" color="white">
-          Loading crypto prices...
-        </Typography>
-      </Box>
-    );
-  }
-
   const displayPrices = prices.length > 0 ? prices : defaultPrices;
 
   return (
@@ -185,6 +166,7 @@ const CryptoPriceTicker = () => {
         overflow: "hidden",
         whiteSpace: "nowrap",
         position: "relative",
+        bgcolor: colors.primaryBlack, // Added background color
         "&:hover": {
           "& .scroll-animation": {
             animationPlayState: "paused",

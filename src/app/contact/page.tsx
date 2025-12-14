@@ -119,6 +119,7 @@ const ContactForm = () => {
             variant="outlined"
             value={form.name}
             onChange={handleChange}
+            required // Mark field as required
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -139,6 +140,7 @@ const ContactForm = () => {
               "& .MuiInputLabel-root": {
                 color: "#9ca3af",
                 "&.Mui-focused": { color: "#10B981" },
+                "&.Mui-error": { color: "#ef4444" }, // Style for error state
               },
             }}
           />
@@ -151,6 +153,7 @@ const ContactForm = () => {
             variant="outlined"
             value={form.phone}
             onChange={handleChange}
+            required // Mark field as required
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -171,6 +174,7 @@ const ContactForm = () => {
               "& .MuiInputLabel-root": {
                 color: "#9ca3af",
                 "&.Mui-focused": { color: "#10B981" },
+                "&.Mui-error": { color: "#ef4444" }, // Style for error state
               },
             }}
           />
@@ -183,6 +187,8 @@ const ContactForm = () => {
             variant="outlined"
             value={form.email}
             onChange={handleChange}
+            required // Mark field as required
+            type="email" // Add email type for better validation
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -203,6 +209,7 @@ const ContactForm = () => {
               "& .MuiInputLabel-root": {
                 color: "#9ca3af",
                 "&.Mui-focused": { color: "#10B981" },
+                "&.Mui-error": { color: "#ef4444" }, // Style for error state
               },
             }}
           />
@@ -217,6 +224,7 @@ const ContactForm = () => {
             rows={4}
             value={form.message}
             onChange={handleChange}
+            required // Mark field as required
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -238,6 +246,7 @@ const ContactForm = () => {
               "& .MuiInputLabel-root": {
                 color: "#9ca3af",
                 "&.Mui-focused": { color: "#10B981" },
+                "&.Mui-error": { color: "#ef4444" }, // Style for error state
               },
             }}
           />
@@ -260,6 +269,10 @@ const ContactForm = () => {
                 "&:hover": {
                   bgcolor: "#0ea371",
                   boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                },
+                "&.Mui-disabled": { // Style for disabled state
+                  bgcolor: "#3f4757", 
+                  color: "#aeb4be",
                 },
                 transition: "all 0.3s ease",
               }}
