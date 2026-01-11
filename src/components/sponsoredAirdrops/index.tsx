@@ -2,6 +2,7 @@
 import React from 'react';
 import { Box, Typography, Paper, Button } from '@mui/material';
 import { Airdrop } from '@/contracts/airdrop.type';
+import Image from 'next/image';
 
 interface Props {
   airdrops: Airdrop[];
@@ -32,11 +33,12 @@ const SponsoredAirdrops: React.FC<Props> = ({ airdrops }) => {
           📢 Sponsored Airdrop Alert
         </Typography>
         {/* Logo */}
-        <Box
-          component="img"
-          src={airdrop.image_urls?.[0] || '/default-airdrop-logo.png'}
+        <Image
+          src={airdrop.image_urls?.[0] || '/assets/images/placeholder.png'}
           alt={`${airdrop.name} logo`}
-          sx={{ width: 80, height: 80, mb: 2, mx: 'auto', borderRadius: '12px' }}
+          width={80}
+          height={80}
+          style={{ marginBottom: 2, margin: 'auto', borderRadius: '12px' }}
         />
 
       

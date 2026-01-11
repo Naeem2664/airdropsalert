@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Typography, Button, Paper } from "@mui/material";
-import { fetchAirdrops } from "../../../libs/api"; // server-side fetch
 import Link from "next/link";
+import Image from "next/image";
+import { Airdrop } from "@/contracts/airdrop.type";
 
+interface SponsoredAirdropProps {
+  sponsored: Airdrop | undefined;
+}
 
-
-export default async function Page() {
-  const allAirdrops = await fetchAirdrops();
-  const sponsored = allAirdrops.find((a) => a.sponsored);
-
+export default function Page({ sponsored }: SponsoredAirdropProps) {
   return (
     <Box
       sx={{
@@ -83,111 +83,101 @@ export default async function Page() {
       {/* Right Content */}
       <Box sx={{ width: { xs: "100%", lg: "50%" } }}>
         {/* Sponsored Airdrop Card */}
-        {sponsored?(<Paper
-          sx={{
-            borderRadius: "16px",
-            p: { xs: 3, md: 4 },
-            textAlign: "center",
-            boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
-            border: "1px solid #374151",
-            backgroundColor: "#111827",
-            width: "100%",
-          }}
-        >
-          <Typography
-            component="h2"
+        {sponsored ? (
+          <Paper
             sx={{
-              fontSize: { xs: "1.5rem", md: "2.25rem" },
-              fontWeight: 700,
-              color: "#ffffff",
-              mb: 2,
+              borderRadius: "16px",
+              p: { xs: 3, md: 4 },
+              textAlign: "center",
+              boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+              border: "1px solid #374151",
+              backgroundColor: "#111827",
+              width: "100%",
             }}
           >
-            📢 Sponsored Airdrop Alert
-          </Typography>
-
-          <Link href={`/airdrop/${sponsored.id}`}>
-            <Paper
+            <Typography
+              component="h2"
               sx={{
-                backgroundColor: "#1F2937",
-                borderRadius: "12px",
-                p: { xs: 3, md: 4 },
-                border: "1px solid #4B5563",
-                boxShadow: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
+                fontSize: { xs: "1.5rem", md: "2.25rem" },
+                fontWeight: 700,
+                color: "#ffffff",
+                mb: 2,
               }}
             >
-              <Box
-                component="img"
-                src={sponsored.image_urls?.[0] || "no image"}
-                alt={`${sponsored.name} logo`}
-                sx={{
-                  width: 80,
-                  height: 80,
-                  mb: 2,
-                  mx: "auto",
-                  borderRadius: "12px",
-                }}
-              />
-              <Typography
-                component="h3"
-                sx={{
-                  fontSize: { xs: "1.25rem", md: "1.5rem" },
-                  fontWeight: 600,
-                  color: "#34D399",
-                  mb: 1,
-                }}
-              >
-                🌟 {sponsored.name} – Claim Now
-              </Typography>
-              <Typography component="p" sx={{ color: "#9CA3AF", mb: 1 }}>
+              📢 Sponsored Airdrop Alert
+            </Typography>
+
+            <Paper
+              sx={{
+                backgroundColor: '#1F2937',
+                borderRadius: '12px',
+                p: { xs: 3, md: 4 },
+                border: '1px solid #4B5563',
+                boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
+              }}
+            >
+              <Link href={`/airdrop/${sponsored.id}`} passHref>
+                <Image
+                  src={
+                    sponsored.image_urls?.[0] ||
+                    '/assets/images/placeholder.png'
+                  }
+                  alt={`${sponsored.name} logo`}
+                  width={80}
+                  height={80}
+                  style={{
+                    marginBottom: 2,
+                    margin: 'auto',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                  }}
+                />
+              </Link>
+              <Link href={`/airdrop/${sponsored.id}`} passHref>
+                <Typography
+                  component="h3"
+                  sx={{
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontWeight: 600,
+                    color: '#34D399',
+                    mb: 1,
+                    cursor: 'pointer',
+                  }}
+                >
+                  🌟 {sponsored.name} – Claim Now
+                </Typography>
+              </Link>
+              <Typography component="p" sx={{ color: '#9CA3AF', mb: 1 }}>
                 {sponsored.description}
               </Typography>
-              <Typography component="p" sx={{ color: "#9CA3AF" }}>
+              <Typography component="p" sx={{ color: '#9CA3AF' }}>
                 <Box component="strong" sx={{ fontWeight: 600 }}>
                   {sponsored.total_distribution}
-                </Box>{" "}
+                </Box>{' '}
                 tokens for early signups.
               </Typography>
               <Button
-                href={sponsored.join_link || "#"}
+                href={sponsored.join_link || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="contained"
                 sx={{
                   mt: 2,
-                  backgroundColor: "#10B981",
-                  "&:hover": { backgroundColor: "#059669" },
+                  backgroundColor: '#10B981',
+                  '&:hover': { backgroundColor: '#059669' },
                 }}
               >
                 Claim Airdrop
               </Button>
             </Paper>
-            <Box
-              component="script"
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "ItemList",
-                  itemListElement: [
-                    {
-                      "@type": "ListItem",
-                      position: 1,
-                      url: sponsored.join_link,
-                      name: sponsored.name,
-                      description: sponsored.description,
-                    },
-                  ],
-                }),
-              }}
-            />
-          </Link>
-        </Paper>):( <Box sx={{ textAlign: "center", color: "#ffffff", py: 10 }}>
-        <Typography variant="h2">
-          No sponsored airdrops available right now.
-        </Typography>
-      </Box>)}
-        
+          </Paper>
+        ) : (
+          <Box sx={{ textAlign: "center", color: "#ffffff", py: 10 }}>
+            <Typography variant="h2">
+              No sponsored airdrops available right now.
+            </Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   );

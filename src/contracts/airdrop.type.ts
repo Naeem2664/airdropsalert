@@ -4,7 +4,13 @@ export interface SocialLink {
   url: string;
 }
 
+export interface Items{
+  subtitle: string;
+  content: string
+}
+
 export interface Detail {
+  items: Items[];
   title: string;
   content: string;
 }

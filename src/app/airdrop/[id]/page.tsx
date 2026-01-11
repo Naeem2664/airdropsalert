@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import Image from "next/image";
 import {
   Box,
@@ -14,20 +13,56 @@ import {
   ListItem,
   ListItemText,
   Container,
+  Stack
 } from "@mui/material";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTelegramPlane,
+  FaDiscord,
+  FaGlobe,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 import PageAddSection from "@/components/sections/adsSections/homeUpperAdSection/page";
 import { SwapHoriz as SwapIcon } from "@mui/icons-material";
 import { fetchAirdropById } from "@/libs/api";
 
-interface Detail {
-  title: string;
+interface DetailItem {
+  subtitle: string;
   content: string;
+}
+interface AirdropDetails {
+  title: string;
+  items: DetailItem[];
 }
 
 interface SocialLink {
   platform: string;
   url: string;
 }
+
+// Helper function to get the appropriate social icon
+const getSocialIcon = (platform: string) => {
+  const iconStyle = { fontSize: '27px'};
+  switch (platform.toLowerCase()) {
+    case 'facebook':
+      return <FaFacebookF style={{...iconStyle, color: '#3b5998' }} />;
+    case 'instagram':
+      return <FaInstagram style={{...iconStyle, color: '#c13584'}} />;
+    case 'telegram':
+      return <FaTelegramPlane style={{...iconStyle, color: '#0088cc'}} />;
+    case 'x':
+    case 'twitter':
+      return <FaXTwitter style={{...iconStyle, color:'#000'}} />;
+    case 'discord':
+      return <FaDiscord style={{...iconStyle, color: '#5865F2'}} />;
+    case 'website':
+      return <FaGlobe style={{...iconStyle,color: '#000'}} />;
+    default:
+      return <FaGlobe style={{...iconStyle,color: '#000'}} />;
+  }
+};
 
 export async function generateMetadata({
   params,
@@ -61,64 +96,6 @@ export async function generateMetadata({
       ? airdrop.description.substring(0, 157) + "..."
       : airdrop.description
     : "Stay updated with the latest crypto airdrops and claim free tokens.";
-
-  return {
-    title: `${airdrop.name} Airdrop | Claim Free Crypto Tokens`,
-    description: shortDescription,
-    openGraph: {
-      title: `${airdrop.name} Airdrop`,
-      description: shortDescription,
-      siteName: "AirdropsAlert",
-      type: "website",
-      images: [
-        {
-          url: airdrop.image_urls?.[0] || "https://www.airdropsalert.com/assets/images/airdrop.jpg",
-          width: 1200,
-          height: 630,
-          alt: `${airdrop.name} Airdrop Image`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${airdrop.name} Airdrop`,
-      description: shortDescription,
-      images: [airdrop.image_urls?.[0] || "https://www.airdropsalert.com/assets/images/airdrop.jpg"],
-    },
-    alternates: {
-      canonical: `https://www.airdropsalert.com/airdrop/${airdrop.id}`,
-    },
-  };
-}
-
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params; // Await the params
-  const airdrop = await fetchAirdropById(id);
-
-  if (!airdrop) {
-    return (
-      <Container maxWidth="md" sx={{ py: 20, textAlign: "center" }}>
-        <Typography variant="h2" sx={{ color: "#fff" }}>
-          Oops! Airdrop not found.
-        </Typography>
-        <Link href="/" passHref>
-          <Button
-            variant="contained"
-            sx={{ mt: 4, backgroundColor: "#10B981" }}
-          >
-            Browse Other Airdrops
-          </Button>
-        </Link>
-      </Container>
-    );
-  }
-
-  const details: Detail[] = airdrop.details || [];
-  const socials: SocialLink[] = airdrop.social_links || [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -154,8 +131,69 @@ export default async function Page({
       "@type": "WebPage",
       "@id": `https://www.airdropsalert.com/airdrop/${id}`,
     },
-    image: [airdrop.image_urls?.[0] || "https://www.airdropsalert.com/assets/images/airdrop.jpg"],
+    image: [airdrop.image_urls?.[0] || "/assets/images/placeholder.png"],
   };
+
+  return {
+    title: `${airdrop.name} Airdrop | Claim Free Crypto Tokens`,
+    description: shortDescription,
+    openGraph: {
+      title: `${airdrop.name} Airdrop`,
+      description: shortDescription,
+      siteName: "AirdropsAlert",
+      type: "website",
+      images: [
+        {
+          url: airdrop.image_urls?.[0] || "/assets/images/placeholder.png",
+          width: 1200,
+          height: 630,
+          alt: `${airdrop.name} Airdrop Image`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${airdrop.name} Airdrop`,
+      description: shortDescription,
+      images: [airdrop.image_urls?.[0] || "/assets/images/placeholder.png"],
+    },
+    alternates: {
+      canonical: `https://www.airdropsalert.com/airdrop/${airdrop.id}`,
+    },
+    other: {
+      "script[type=\"application/ld+json\"]": JSON.stringify(jsonLd),
+    },
+  };
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params; // Await the params
+  const airdrop = await fetchAirdropById(id);
+
+  if (!airdrop) {
+    return (
+      <Container maxWidth="md" sx={{ py: 20, textAlign: "center" }}>
+        <Typography variant="h2" sx={{ color: "#fff" }}>
+          Oops! Airdrop not found.
+        </Typography>
+        <Link href="/" passHref>
+          <Button
+            variant="contained"
+            sx={{ mt: 4, backgroundColor: "#10B981" }}
+          >
+            Browse Other Airdrops
+          </Button>
+        </Link>
+      </Container>
+    );
+  }
+
+  const airdropDetails: AirdropDetails[] = airdrop.details || [];
+  const socials: SocialLink[] = airdrop.social_links || [];
 
   const customColors = {
     primaryGreen: "#10B981",
@@ -169,12 +207,6 @@ export default async function Page({
 
   return (
     <>
-      <Script
-        id={`airdrop-jsonld-${id}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
         <PageAddSection />
 
@@ -207,7 +239,7 @@ export default async function Page({
               </Typography>
               <Divider sx={{ my: 2, borderColor: customColors.gray800 }} />
               <Image
-                src={airdrop.image_urls?.[0] ?? "/default-og-image.jpg"}
+                src={airdrop.image_urls?.[0] ?? "/assets/images/placeholder.png"}
                 alt={`${airdrop.name} logo`}
                 width={90}
                 height={90}
@@ -276,26 +308,19 @@ export default async function Page({
                     Social Links
                   </Typography>
                   <Divider sx={{ my: 2, borderColor: customColors.gray800 }} />
-                  {socials.map((social, idx) => (
-                    <ListItem key={idx} sx={{ px: 0 }}>
-                      <ListItemText
-                        primary={social.platform}
-                        primaryTypographyProps={{
-                          color: customColors.textSecondary,
-                        }}
-                        secondary={
-                          <Link
-                            href={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer nofollow"
-                            style={{ color: customColors.textPrimary }}
-                          >
-                            {social.url}
-                          </Link>
-                        }
-                      />
-                    </ListItem>
-                  ))}
+                  <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+                    {socials.map((social, idx) => (
+                      <Link
+                        key={idx}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        style={{ color: customColors.textPrimary,backgroundColor:'#f9ffe6', borderRadius: '30%', padding: '5px' }}
+                      >
+                        {getSocialIcon(social.platform)}
+                      </Link>
+                    ))}
+                  </Stack>
                 </>
               )}
 
@@ -323,7 +348,7 @@ export default async function Page({
               px: { xs: 0, md: 4 },
             }}
           >
-            <Box mb={6} textAlign="center">
+            <Box mb={6} textAlign="start">
               <Chip
                 label={airdrop.airdrop_status || "Active Airdrop"}
                 sx={{
@@ -341,27 +366,39 @@ export default async function Page({
                 {airdrop.name}
               </Typography>
               <Typography
-                variant="h2"
+                variant="h5"
                 sx={{ color: customColors.primaryGreen }}
               >
                 {airdrop.description}
               </Typography>
             </Box>
 
-            {details.map((detail, idx) => (
-              <Box mb={4} key={idx}>
+            {airdropDetails?.[0]?.title && (
+              <Box mb={4}>
                 <Typography
                   variant="h3"
                   gutterBottom
+                  sx={{ fontWeight: 700, color: '#fff' }}
+                >
+                  {airdropDetails[0].title}
+                </Typography>
+              </Box>
+            )}
+
+            {airdropDetails?.[0]?.items.map((item, idx) => (
+              <Box mb={4} key={idx}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
                   sx={{ fontWeight: 600, color: "#fff" }}
                 >
-                  {detail.title}
+                  {item.subtitle}
                 </Typography>
                 <Typography
                   variant="h6"
                   sx={{ color: customColors.textSecondary }}
                 >
-                  {detail.content}
+                  {item.content}
                 </Typography>
               </Box>
             ))}
